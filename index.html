@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stepy Solutions — Registration se Revenue tak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000000;--beige:#F5F5DC;--bg:#FAFAF5;--rg:#C9A96E;--rg2:#E8D5B0;
+  --white:#fff;--gray:#888;--border:#E8E8E0;--dark:#111;
+  --purple:#6B21A8;--pink:#EC4899;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #222}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rg);letter-spacing:.05em}
+.logo span{color:#fff;font-weight:300}
+.nav-links{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.nav-links a{color:#ccc;font-size:13px;transition:color .2s;letter-spacing:.03em}
+.nav-links a:hover{color:var(--rg)}
+.nav-cta{background:var(--rg);color:#000 !important;padding:8px 18px;border-radius:4px;font-weight:500 !important;font-size:13px !important}
+.nav-cta:hover{background:var(--rg2) !important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--rg)}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-top:64px}
+.page.active{display:block}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;align-items:center;justify-content:center;background:#000;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%, rgba(107,33,168,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(236,72,153,0.08) 0%, transparent 60%)}
+.platforms-scroll{position:absolute;top:80px;left:0;right:0;overflow:hidden;opacity:0.25}
+.platforms-track{display:flex;gap:2rem;animation:scroll-left 30s linear infinite;width:max-content;align-items:center}
+.platforms-track img{height:28px;filter:invert(1);opacity:.6}
+.platforms-track span{font-size:11px;color:#fff;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+@keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero-content{text-align:center;padding:2rem;position:relative;z-index:2;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--rg);color:var(--rg);font-size:11px;padding:6px 16px;border-radius:20px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);color:#fff;line-height:1.1;margin-bottom:1rem;font-weight:300}
+.hero h1 em{color:var(--rg);font-style:italic}
+.hero-sub{color:#aaa;font-size:1.05rem;margin-bottom:2.5rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.8}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--rg);color:#000;padding:14px 32px;border-radius:4px;font-weight:500;font-size:14px;letter-spacing:.05em;transition:all .2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--rg2);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;padding:14px 32px;border-radius:4px;font-size:14px;letter-spacing:.05em;transition:all .2s;border:1px solid #444;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--rg);color:var(--rg)}
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;padding-top:3rem;border-top:1px solid #222;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--rg)}
+.hstat-l{font-size:11px;color:#666;letter-spacing:.08em;text-transform:uppercase}
+
+/* SECTION COMMON */
+.section{padding:6rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--rg);margin-bottom:.75rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:1.5rem;line-height:1.2}
+.section-sub{color:var(--gray);font-size:.95rem;line-height:1.8;max-width:600px;margin-bottom:3rem}
+hr.gold{border:0;border-top:1px solid var(--rg);width:60px;margin:1rem 0 2rem}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.plan-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;transition:transform .2s,border-color .2s}
+.plan-card:hover{transform:translateY(-4px);border-color:var(--rg)}
+.plan-card.featured{border-color:var(--rg);border-width:2px}
+.plan-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--rg);color:#000;font-size:10px;padding:4px 14px;border-radius:20px;font-weight:500;letter-spacing:.05em;white-space:nowrap}
+.plan-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.25rem}
+.plan-desc{font-size:12px;color:var(--gray);margin-bottom:1.5rem}
+.plan-price{font-size:2.2rem;font-weight:300;line-height:1}
+.plan-price sup{font-size:1rem;color:var(--rg);vertical-align:top;margin-top:.5rem}
+.plan-price .mo{font-size:.85rem;color:var(--gray)}
+.plan-comm{font-size:12px;color:#2D7A4F;background:#f0fff6;padding:4px 10px;border-radius:4px;display:inline-block;margin:.5rem 0 1.25rem}
+.plan-note{font-size:11px;color:var(--gray);margin-bottom:1rem;font-style:italic}
+.plan-feats{list-style:none;font-size:13px;margin-bottom:1.5rem}
+.plan-feats li{padding:6px 0;border-bottom:1px solid #f5f5f0;display:flex;gap:.6rem;color:#444;align-items:flex-start}
+.plan-feats li:last-child{border:0}
+.plan-feats li::before{content:'✓';color:var(--rg);flex-shrink:0;margin-top:1px}
+.plan-feats li.x::before{content:'—';color:#ccc}
+.plan-buy{width:100%;padding:12px;background:var(--black);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.05em;transition:all .2s;font-family:'DM Sans',sans-serif}
+.plan-buy:hover{background:#333}
+.plan-card.featured .plan-buy{background:var(--rg);color:#000}
+
+/* ADDONS */
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:2rem}
+.addon{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s}
+.addon:hover{border-color:var(--rg)}
+.addon-icon{font-size:24px;flex-shrink:0}
+.addon-info h4{font-size:.95rem;font-weight:500;margin-bottom:.25rem}
+.addon-info p{font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:.5rem}
+.addon-price{font-size:.9rem;color:var(--rg);font-weight:500}
+
+/* SERVICES */
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+.cat-tab{padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid transparent;transition:all .15s;background:none;font-family:'DM Sans',sans-serif}
+.cat-tab.active{background:var(--black);color:#fff}
+.cat-tab:hover:not(.active){border-color:var(--rg);color:var(--rg)}
+.svcs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.svc-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;cursor:pointer;transition:all .15s;position:relative}
+.svc-card:hover{border-color:var(--rg);transform:translateY(-2px)}
+.svc-card.in-cart{border-color:var(--rg);background:#fffbf0}
+.svc-no{font-size:10px;color:var(--rg);font-weight:500;margin-bottom:.25rem}
+.svc-name{font-size:13px;font-weight:500;margin-bottom:.25rem}
+.svc-price{font-size:12px;color:var(--gray)}
+.svc-add{position:absolute;top:.75rem;right:.75rem;width:24px;height:24px;border-radius:50%;background:var(--black);color:#fff;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.svc-card.in-cart .svc-add{background:var(--rg);color:#000}
+.cart-bar{position:fixed;bottom:0;left:0;right:0;background:#000;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;z-index:998;transform:translateY(100%);transition:transform .3s;border-top:1px solid #333}
+.cart-bar.show{transform:translateY(0)}
+.cart-info{font-size:13px}
+.cart-info strong{color:var(--rg)}
+.cart-checkout{background:var(--rg);color:#000;border:none;padding:10px 24px;border-radius:4px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.testi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;position:relative}
+.testi::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--rg);position:absolute;top:.5rem;left:1rem;line-height:1;opacity:.3}
+.testi-img{width:60px;height:60px;border-radius:8px;object-fit:cover;margin-bottom:1rem;filter:blur(0px)}
+.testi-img.blurred{filter:blur(8px)}
+.testi-text{font-size:13px;color:#555;line-height:1.7;margin-bottom:1rem;font-style:italic}
+.testi-name{font-size:.85rem;font-weight:500}
+.testi-platform{font-size:11px;color:var(--gray)}
+.testi-stars{color:var(--rg);font-size:14px;margin-bottom:.5rem}
+
+/* POLICIES */
+.policy-content{max-width:800px;margin:0 auto}
+.policy-content h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin:2rem 0 1rem}
+.policy-content h3{font-size:1rem;font-weight:500;margin:1.5rem 0 .5rem;color:var(--rg)}
+.policy-content p{font-size:13px;color:#555;line-height:1.9;margin-bottom:1rem}
+.policy-content ul{font-size:13px;color:#555;line-height:1.9;margin-bottom:1rem;padding-left:1.5rem}
+.policy-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+.p-tab{padding:8px 16px;font-size:12px;cursor:pointer;border:1px solid var(--border);border-radius:20px;background:none;font-family:'DM Sans',sans-serif;transition:all .15s}
+.p-tab.active{background:#000;color:#fff;border-color:#000}
+
+/* CHECKOUT / PAYMENT */
+.checkout-wrap{max-width:700px;margin:0 auto}
+.form-group{margin-bottom:1.25rem}
+.form-group label{font-size:12px;color:#666;letter-spacing:.05em;display:block;margin-bottom:.4rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;background:#fff;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--rg)}
+.form-group input.required-field{border-left:3px solid var(--rg)}
+.order-summary{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+.order-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid #f5f5f0}
+.order-row:last-child{border:0;font-weight:500;font-size:1rem;padding-top:10px}
+.order-row .val{color:var(--rg)}
+.tc-check{display:flex;align-items:flex-start;gap:.75rem;font-size:12px;color:#555;line-height:1.6;padding:1rem;background:#f9f9f4;border-radius:6px;margin-bottom:1.5rem}
+.tc-check input{margin-top:3px;flex-shrink:0}
+.pay-btn{width:100%;padding:16px;background:#000;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.05em;transition:all .2s}
+.pay-btn:hover{background:#222}
+.razorpay-note{font-size:11px;text-align:center;color:var(--gray);margin-top.75rem;display:flex;align-items:center;gap:.5rem;justify-content:center}
+
+/* ADMIN */
+.admin-wrap{max-width:1100px;margin:0 auto}
+.admin-grid{display:grid;grid-template-columns:220px 1fr;gap:2rem;min-height:70vh}
+.admin-sidebar{background:#000;border-radius:12px;padding:1.5rem}
+.admin-sidebar h3{color:var(--rg);font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:1.5rem}
+.admin-menu{list-style:none}
+.admin-menu li{padding:8px 12px;color:#aaa;font-size:13px;cursor:pointer;border-radius:6px;margin-bottom:2px;transition:all .15s}
+.admin-menu li.active,.admin-menu li:hover{background:#1a1a1a;color:var(--rg)}
+.admin-content{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.admin-panel h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:.75rem}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px}
+.admin-table th{text-align:left;padding:8px 12px;background:#f9f9f4;font-weight:500;border-bottom:1px solid var(--border)}
+.admin-table td{padding:8px 12px;border-bottom:1px solid #f5f5f0}
+.admin-table tr:last-child td{border:0}
+.admin-input{padding:8px 10px;border:1px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;width:100%}
+.admin-btn{padding:6px 14px;background:#000;color:#fff;border:none;border-radius:4px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.admin-btn.danger{background:#e74c3c}
+.admin-btn.gold{background:var(--rg);color:#000}
+.testi-admin-card{background:#f9f9f4;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:.75rem;display:flex;align-items:flex-start;gap:1rem}
+
+/* FOOTWEAR */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin-top:2rem}
+.product-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,border-color .2s}
+.product-card:hover{transform:translateY(-4px);border-color:var(--rg)}
+.product-img{height:200px;background:linear-gradient(135deg,#f5f5dc,#e8e8d0);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.product-badge{position:absolute;top:.75rem;left:.75rem;background:#000;color:var(--rg);font-size:10px;padding:3px 10px;border-radius:3px;letter-spacing:.05em}
+.product-info{padding:1rem}
+.product-name{font-size:.95rem;font-weight:500;margin-bottom:.25rem}
+.product-price{font-size:1.1rem;color:var(--rg);font-family:'Cormorant Garamond',serif;margin-bottom:.5rem}
+.product-price del{font-size:.8rem;color:#ccc;margin-left:.5rem}
+.product-meta{font-size:11px;color:var(--gray);margin-bottom.75rem}
+.product-actions{display:flex;gap:.5rem;margin-top:.75rem}
+.product-actions button{flex:1;padding:9px;border:1px solid var(--border);border-radius:4px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.product-actions .add-cart-btn{background:#000;color:#fff;border:0}
+.product-actions .add-cart-btn:hover{background:#333}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info p{font-size:13px;color:#555;line-height:1.8;margin-bottom:1.5rem}
+.contact-item{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem;font-size:13px;color:#444}
+.contact-item .icon{font-size:18px;color:var(--rg);flex-shrink:0;margin-top:2px}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;margin-bottom:1rem}
+.social-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.social-link{padding:8px 16px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12px;display:flex;align-items:center;gap:.5rem;transition:all .15s;cursor:pointer}
+.social-link:hover{border-color:var(--rg);color:var(--rg)}
+.support-btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}
+.sup-btn{padding:12px 24px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;display:flex;align-items:center;gap:.5rem;font-family:'DM Sans',sans-serif;transition:all .2s}
+.sup-btn.wa{background:#25D366;color:#fff}
+.sup-btn.call{background:#000;color:#fff}
+.sup-btn.paid-call{background:var(--rg);color:#000}
+.sup-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-img-wrap{position:relative}
+.about-img-box{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#000 0%,#1a1a2e 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:5rem;border:1px solid #333;position:relative;overflow:hidden}
+.about-img-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(201,169,110,.15),transparent)}
+.about-quote{position:absolute;bottom:-20px;right:-20px;background:#000;color:#fff;padding:1rem 1.5rem;border-radius:10px;border:1px solid #333;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;max-width:200px;color:var(--rg)}
+.expertise-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
+.chip{padding:6px 14px;background:#f5f5dc;border-radius:20px;font-size:11px;color:#333;font-weight:500}
+
+/* DROPSHIPPING */
+.drop-form{max-width:600px;margin:2rem auto 0;background:#fff;border:1px solid var(--border);border-radius:12px;padding:2rem}
+.drop-form h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom.25rem}
+
+/* AFFILIATE */
+.affiliate-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.aff-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem;transition:all .15s}
+.aff-card:hover{border-color:var(--rg);transform:translateY(-2px)}
+.aff-img{height:140px;background:#f5f5dc;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.75rem;position:relative}
+.aff-earn{position:absolute;bottom:.4rem;right:.4rem;background:var(--rg);color:#000;font-size:10px;padding:2px 8px;border-radius:3px}
+
+/* FOOTER */
+footer{background:#000;color:#888;padding:4rem 2rem 2rem;border-top:1px solid #1a1a1a}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--rg);margin-bottom:1rem}
+.footer-logo span{color:#fff}
+.footer-desc{font-size:12px;line-height:1.8;color:#666;margin-bottom:1.5rem}
+.footer-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#555;margin-bottom:1rem}
+.footer-links{list-style:none;font-size:12px}
+.footer-links li{margin-bottom:.5rem}
+.footer-links a{color:#666;transition:color .2s}
+.footer-links a:hover{color:var(--rg)}
+.footer-bottom{border-top:1px solid #1a1a1a;padding-top:2rem;margin-top:3rem;display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:1rem}
+.wa-float{position:fixed;bottom:80px;right:20px;background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:997;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,.3);animation:pulse-wa 2s infinite}
+@keyframes pulse-wa{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.3)}50%{box-shadow:0 4px 30px rgba(37,211,102,.5)}}
+.wa-tooltip{position:absolute;right:60px;background:#000;color:#fff;padding:6px 12px;border-radius:6px;font-size:11px;white-space:nowrap;display:none}
+.wa-float:hover .wa-tooltip{display:block}
+.timing-badge{background:#f0fff6;color:#2D7A4F;font-size:10px;padding:3px 8px;border-radius:3px;display:inline-block;margin-top:.25rem}
+.timing-badge.paid{background:#fff8f0;color:#C9922A}
+
+/* NOTIFICATIONS */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#000;color:#fff;padding:12px 24px;border-radius:30px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;border:1px solid var(--rg);pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal.open{opacity:1;pointer-events:all}
+.modal-box{background:#fff;border-radius:16px;padding:2.5rem;max-width:480px;width:90%;text-align:center;transform:scale(.95);transition:transform .3s}
+.modal.open .modal-box{transform:scale(1)}
+.modal-icon{font-size:3rem;margin-bottom:1rem}
+.modal-box h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.75rem}
+.modal-box p{font-size:13px;color:#666;line-height:1.7;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:1rem;right:1.25rem;font-size:1.5rem;cursor:pointer;color:#999}
+
+/* PRODUCT RESEARCH */
+.research-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.res-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .2s}
+.res-card:hover{border-color:var(--rg);transform:translateY(-3px)}
+.res-icon{font-size:2.5rem;margin-bottom:.75rem}
+.res-card h3{font-size:1rem;font-weight:500;margin-bottom.5rem}
+.res-card p{font-size:12px;color:var(--gray);line-height:1.7;margin-bottom:1rem}
+.res-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--rg)}
+
+/* CUSTOM REQUEST BOX */
+.custom-req{background:linear-gradient(135deg,#000,#111);color:#fff;border-radius:16px;padding:3rem 2.5rem;text-align:center;margin-top:3rem}
+.custom-req h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--rg);margin-bottom:.5rem}
+.custom-req p{font-size:.9rem;opacity:.7;margin-bottom:1.5rem}
+.custom-req textarea{width:100%;max-width:500px;padding:14px;border:1px solid #333;border-radius:8px;background:#1a1a1a;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;resize:vertical;min-height:100px}
+.custom-req textarea::placeholder{color:#555}
+
+/* LABEL PRINT */
+.label-sec{background:#fff;border:1px solid var(--border);border-radius:12px;padding:2rem;margin-top:2rem}
+.label-sec h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom.25rem}
+.label-sizes{display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0}
+.label-size{padding:8px 16px;border:1px solid var(--border);border-radius:4px;font-size:12px;cursor:pointer;transition:all .15s}
+.label-size.active,.label-size:hover{border-color:var(--rg);background:#fffbf0}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#000;padding:1rem 2rem;gap:.75rem}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:2.5rem}
+  .admin-grid{grid-template-columns:1fr}
+  .admin-sidebar{order:2}
+}
+@media(max-width:480px){
+  .footer-inner{grid-template-columns:1fr}
+  .plans-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')" style="cursor:pointer">Stepy<span> Solutions</span></div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('plans')">Plans</a>
+      <a href="#" onclick="showPage('services')">Services</a>
+      <a href="#" onclick="showPage('footwear')">Footwear</a>
+      <a href="#" onclick="showPage('tea')">Tea</a>
+      <a href="#" onclick="showPage('affiliate')">Affiliate</a>
+      <a href="#" onclick="showPage('dropship')">Dropship</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('testimonials')">Reviews</a>
+      <a href="#" onclick="showPage('contact')">Support</a>
+      <a href="#" onclick="showPage('policy')">Policies</a>
+      <a href="#" onclick="showPage('admin')">Admin</a>
+      <a href="#" class="nav-cta" onclick="showPage('plans')">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- WA FLOAT -->
+<div class="wa-float" onclick="openWA('general')">
+  💬
+  <div class="wa-tooltip">Chat with us (8am–10pm)</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+  <div class="modal-box" style="position:relative">
+    <span class="modal-close" onclick="closeModal('successModal')">×</span>
+    <div class="modal-icon">🎉</div>
+    <h2>Congratulations!</h2>
+    <p id="successMsg">Your order has been placed successfully! We will contact you shortly. You'll receive a WhatsApp notification with all details.</p>
+    <div style="background:#f9f9f4;border-radius:8px;padding:1rem;font-size:12px;color:#555;margin-bottom:1.5rem">
+      📱 Tracking / Order ID will be sent on WhatsApp within <strong>24 hours</strong> for physical products.<br>
+      📞 For services, we'll call you as soon as possible.
+    </div>
+    <button class="btn-primary" onclick="closeModal('successModal');openWA('order')" style="width:100%;justify-content:center">Open WhatsApp to Track</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-box" style="position:relative;max-width:560px;text-align:left;max-height:85vh;overflow-y:auto">
+    <span class="modal-close" onclick="closeModal('checkoutModal')">×</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1.5rem">Complete Your Order</h2>
+    <div id="checkoutSummary" class="order-summary" style="margin-bottom:1.5rem"></div>
+    <div class="form-group">
+      <label>Full Name *</label>
+      <input type="text" id="co_name" class="required-field" placeholder="Aapka naam">
+    </div>
+    <div class="form-group">
+      <label>WhatsApp / Mobile Number *</label>
+      <input type="tel" id="co_phone" class="required-field" placeholder="10 digit number">
+    </div>
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" id="co_email" class="required-field" placeholder="your@email.com">
+    </div>
+    <div id="addressFields">
+      <div class="form-group">
+        <label>Delivery Address *</label>
+        <textarea id="co_address" rows="2" placeholder="Full address with pincode" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px"></textarea>
+      </div>
+    </div>
+    <div id="loginFields" style="display:none">
+      <div class="form-group">
+        <label>Create User ID (Optional)</label>
+        <input type="text" id="co_uid" placeholder="Username for future logins">
+      </div>
+      <div class="form-group">
+        <label>Password (Optional)</label>
+        <input type="password" id="co_pass" placeholder="Create a password">
+      </div>
+    </div>
+    <div class="tc-check">
+      <input type="checkbox" id="co_tc">
+      <span>I accept the <a href="#" onclick="showPage('policy');closeModal('checkoutModal')" style="color:var(--rg)">Terms & Conditions</a>, Privacy Policy, and understand the <strong>No Refund Policy</strong> (7-day refund window with service charges deducted). Commission applies only on monthly income above ₹25,000.</span>
+    </div>
+    <button class="pay-btn" onclick="processPayment()">
+      🔒 Pay Securely via Razorpay
+    </button>
+    <div class="razorpay-note" style="margin-top:.75rem">
+      <svg width="60" height="16" viewBox="0 0 80 20" fill="none"><text y="14" font-size="13" fill="#528FF0" font-weight="bold">Razorpay</text></svg>
+      Secured payment • 50% advance required
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: HOME ===================== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="platforms-scroll">
+      <div class="platforms-track" id="platformsTrack">
+        <span>Amazon</span><span>Flipkart</span><span>Meesho</span><span>Myntra</span><span>Ajio</span><span>Nykaa</span><span>JioMart</span><span>Blinkit</span><span>Zepto</span><span>Etsy</span><span>eBay</span><span>Shopsy</span><span>GlowRoad</span><span>Cutloot</span><span>Shop101</span><span>Instamart</span><span>Noon</span><span>Amazon Global</span>
+        <span>Amazon</span><span>Flipkart</span><span>Meesho</span><span>Myntra</span><span>Ajio</span><span>Nykaa</span><span>JioMart</span><span>Blinkit</span><span>Zepto</span><span>Etsy</span><span>eBay</span><span>Shopsy</span><span>GlowRoad</span><span>Cutloot</span><span>Shop101</span><span>Instamart</span><span>Noon</span><span>Amazon Global</span>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">📍 Jaipur, Rajasthan • Est. 2024</div>
+      <h1>E-commerce Growth<br><em>Registration se Revenue tak</em></h1>
+      <p class="hero-sub">India's premium e-commerce management partner. 15+ platforms, legal expertise, AI creatives, and full account management — for serious sellers.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('plans')">View Plans & Pricing →</button>
+        <button class="btn-outline" onclick="showPage('services')">Explore 62+ Services</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">62+</div><div class="hstat-l">Services</div></div>
+        <div class="hstat"><div class="hstat-n">15+</div><div class="hstat-l">Platforms</div></div>
+        <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Expert Plans</div></div>
+        <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Dedicated Support</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY US -->
+  <div class="section" style="background:#fff">
+    <div class="section-inner">
+      <div class="section-label">Why Stepy Solutions</div>
+      <div class="section-title">Complete E-commerce Partner<br>for Indian & Global Markets</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-top:2rem">
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">⚖️</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">Legal Expertise</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">GST, IEC, Trademark, FSSAI, ITR — complete legal compliance for sellers.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">🤖</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">AI-Powered Creatives</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">Professional product photos, videos, infographics and brand design using AI tools.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">📈</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">Hybrid Pricing</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">Monthly retainer + commission model. Commission only above ₹25,000 monthly income.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">🌍</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">Global Expansion</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">Etsy, eBay, Noon, Amazon Global — IEC, Payoneer, ICEgate setup included.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">📱</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">WhatsApp Updates</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">All marketplace changes, policy updates, and news sent immediately on WhatsApp.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:12px;transition:all .2s" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:2rem;margin-bottom:.75rem">🔒</div>
+          <h4 style="font-size:.95rem;margin-bottom.25rem">100% Transparent</h4>
+          <p style="font-size:12px;color:var(--gray);line-height:1.7">No hidden fees. We don't promise 100% growth — honest, results-driven approach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM ICONS SECTION -->
+  <div class="section" style="background:var(--bg)">
+    <div class="section-inner" style="text-align:center">
+      <div class="section-label">Platforms We Manage</div>
+      <div class="section-title">15+ Indian & Global Marketplaces</div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem">
+        <!-- Platform pills -->
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🛒 Amazon India</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🔵 Flipkart</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🟣 Meesho</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🛍 Myntra</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🎨 Ajio</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">💄 Nykaa</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🏪 JioMart</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">⚡ Blinkit</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🟡 Zepto</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🌿 Instamart</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🌐 Etsy Global</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🌐 eBay Global</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🛒 Shopsy</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🌸 GlowRoad</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">✂️ Cutloot</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">🏬 Shop101</span>
+        <span style="padding:10px 20px;background:#fff;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500">☀️ Noon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS BANNER -->
+  <div class="section" style="background:#000;padding:4rem 2rem">
+    <div class="section-inner" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem">
+      <div onclick="showPage('footwear')" style="border:1px solid #333;border-radius:12px;padding:2rem;cursor:pointer;transition:all .2s;text-align:center" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='#333'">
+        <div style="font-size:3rem;margin-bottom:.75rem">👟</div>
+        <div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.2rem">Footwear Shop</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:.25rem">Bulk & Single • Pan India</div>
+      </div>
+      <div onclick="showPage('tea')" style="border:1px solid #333;border-radius:12px;padding:2rem;cursor:pointer;transition:all .2s;text-align:center" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='#333'">
+        <div style="font-size:3rem;margin-bottom:.75rem">🍵</div>
+        <div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.2rem">Premium Tea</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:.25rem">Single & Bulk Orders</div>
+      </div>
+      <div onclick="showPage('services')" style="border:1px solid #333;border-radius:12px;padding:2rem;cursor:pointer;transition:all .2s;text-align:center" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='#333'">
+        <div style="font-size:3rem;margin-bottom:.75rem">💼</div>
+        <div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.2rem">E-com Services</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:.25rem">62+ Services Available</div>
+      </div>
+      <div onclick="showPage('affiliate')" style="border:1px solid #333;border-radius:12px;padding:2rem;cursor:pointer;transition:all .2s;text-align:center" onmouseover="this.style.borderColor='var(--rg)'" onmouseout="this.style.borderColor='#333'">
+        <div style="font-size:3rem;margin-bottom:.75rem">🤝</div>
+        <div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.2rem">Affiliate & Dropship</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:.25rem">Earn Without Buying Stock</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS PREVIEW -->
+  <div class="section" style="background:var(--bg)">
+    <div class="section-inner">
+      <div class="section-label">Client Stories</div>
+      <div class="section-title">Results That Speak</div>
+      <div id="homeTestimonials" class="testi-grid"></div>
+      <div style="text-align:center;margin-top:2rem">
+        <button class="btn-primary" onclick="showPage('testimonials')">View All Reviews →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM REQUEST -->
+  <div class="section" style="background:#fff">
+    <div class="section-inner">
+      <div class="custom-req">
+        <h3>Custom Problem Solving — Service #62</h3>
+        <p>Koi bhi problem ho, hum solve karenge. Apni requirement describe karein:</p>
+        <textarea id="customReqText" placeholder="Apna E-commerce problem yahan likhen..."></textarea>
+        <br><br>
+        <button class="btn-primary" onclick="submitCustomReq()">Send via WhatsApp →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: PLANS ===================== -->
+<div class="page" id="page-plans">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Pricing</div>
+      <div class="section-title">Choose Your Growth Plan</div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:.5rem">* Commission applies only when monthly income exceeds ₹25,000. Government fees charged at actuals. All marketplace updates on WhatsApp.</p>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:.5rem">* 50% advance fee required to start work. 7-day refund window (service charges deducted).</p>
+      <p style="font-size:13px;color:#c0392b;margin-bottom:2rem">* We do NOT promise 100% growth or orders — results depend on your product & market demand.</p>
+      <hr class="gold">
+
+      <div class="plans-grid" id="plansGrid">
+        <!-- Plans rendered by JS -->
+      </div>
+
+      <!-- ADDONS -->
+      <div style="margin-top:4rem">
+        <div class="section-label">Add-Ons</div>
+        <div class="section-title" style="font-size:1.8rem">Enhance Any Plan</div>
+        <p style="font-size:12px;color:var(--gray);margin-bottom:1rem">Add-ons can be purchased by any plan subscriber at additional cost.</p>
+        <div class="addons-grid" id="addonsGrid"></div>
+      </div>
+
+      <!-- FREE SERVICES FOR PLAN BUYERS -->
+      <div style="margin-top:4rem;background:#000;color:#fff;border-radius:16px;padding:2.5rem">
+        <div style="color:var(--rg);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">Plan Benefits</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:1rem">Free Services Included in All Plans</div>
+        <p style="font-size:13px;opacity:.7;margin-bottom:1.5rem">Plan buyers get FREE access to all services except: Financial/Tax services, Document creation (IEC, AD Code, Food Licence), Trademark services, and paid add-ons.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem">
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ All listing & SEO services</div>
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ Account health monitoring</div>
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ PPC management (Standard+)</div>
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ Return dispute filing</div>
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ WhatsApp marketplace alerts</div>
+          <div style="border:1px solid #333;border-radius:8px;padding:1rem;font-size:12px;color:#aaa">✓ Customer support (9am–3pm)</div>
+        </div>
+      </div>
+
+      <!-- REFERRAL -->
+      <div style="margin-top:4rem;background:linear-gradient(135deg,#1a0a2e,#2d1a4e);border-radius:16px;padding:2.5rem;color:#fff;text-align:center">
+        <div style="font-size:11px;letter-spacing:.1em;color:var(--rg);margin-bottom:.5rem">REFERRAL PROGRAM</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:.5rem">Refer 1 Seller → Get <span style="color:var(--rg)">10% OFF</span> for 12 Months</div>
+        <p style="font-size:13px;opacity:.7;margin-bottom:1.5rem">Refer 1 seller who signs up & pays → You get 10% discount on your monthly bill for 12 months. Discount activates after referred seller's first payment.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+          <div style="background:rgba(255,255,255,.05);border:1px solid #444;padding:1rem 2rem;border-radius:8px;font-size:13px">Refer 1 Seller<br><span style="color:var(--rg);font-size:1.5rem;font-family:'Cormorant Garamond',serif">10% OFF</span></div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid #444;padding:1rem 2rem;border-radius:8px;font-size:13px">For Duration<br><span style="color:var(--rg);font-size:1.5rem;font-family:'Cormorant Garamond',serif">12 Months</span></div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid #444;padding:1rem 2rem;border-radius:8px;font-size:13px">Activation<br><span style="color:var(--rg);font-size:1.5rem;font-family:'Cormorant Garamond',serif">After 1st Pay</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: SERVICES ===================== -->
+<div class="page" id="page-services">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">All Services</div>
+      <div class="section-title">62+ Professional Services</div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:2rem">Select services to add to cart. Without plan: pay per service. With plan: most services are free.</p>
+      <div class="cat-tabs" id="catTabs"></div>
+      <div class="svcs-grid" id="svcsGrid"></div>
+      <div class="cart-bar" id="cartBar">
+        <div class="cart-info"><strong id="cartCount">0</strong> services selected • Total: <strong id="cartTotal">₹0</strong></div>
+        <button class="cart-checkout" onclick="openServiceCheckout()">Proceed to Pay →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: FOOTWEAR ===================== -->
+<div class="page" id="page-footwear">
+  <div style="background:#000;padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,169,110,.1),transparent 70%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:11px;letter-spacing:.15em;color:var(--rg);text-transform:uppercase;margin-bottom:.5rem">Stepy Solutions</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;margin-bottom:.75rem">Premium Footwear Collection</div>
+      <p style="color:#888;font-size:.95rem;max-width:500px;margin:0 auto">Authentic footwear • Bulk & Single orders • 1-day delivery Jaipur • 3–4 days Pan India</p>
+      <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:6px 16px;border-radius:20px;font-size:11px">⚡ 1-Day Delivery Jaipur</span>
+        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:6px 16px;border-radius:20px;font-size:11px">📦 3-4 Days Pan India</span>
+        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:6px 16px;border-radius:20px;font-size:11px">🏭 Bulk Orders Welcome</span>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="font-size:13px;font-weight:500">Filter:</div>
+        <button onclick="filterProducts('all','footwear')" class="cat-tab active" id="fw-all">All</button>
+        <button onclick="filterProducts('mens','footwear')" class="cat-tab" id="fw-mens">Men's</button>
+        <button onclick="filterProducts('womens','footwear')" class="cat-tab" id="fw-womens">Women's</button>
+        <button onclick="filterProducts('kids','footwear')" class="cat-tab" id="fw-kids">Kids</button>
+        <button onclick="filterProducts('bulk','footwear')" class="cat-tab" id="fw-bulk">Bulk Orders</button>
+      </div>
+      <div class="product-grid" id="footwearGrid"></div>
+
+      <!-- Return Policy -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:3rem">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:.75rem">Return & Exchange Policy — Footwear</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:13px">
+          <div style="padding:1rem;background:#f0fff6;border-radius:8px;border-left:3px solid #2D7A4F"><strong>Returns Accepted:</strong><br>• Wrong size received<br>• Damaged product on delivery<br>• Return window: 7 days only</div>
+          <div style="padding:1rem;background:#fff0f0;border-radius:8px;border-left:3px solid #e74c3c"><strong>Not Accepted:</strong><br>• No exchange option<br>• Used products<br>• After 7 days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: TEA ===================== -->
+<div class="page" id="page-tea">
+  <div style="background:#1a0f00;padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(139,90,43,.2),transparent 70%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:11px;letter-spacing:.15em;color:#C9922A;text-transform:uppercase;margin-bottom:.5rem">Stepy Solutions</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;margin-bottom:.75rem">Premium Tea Collection</div>
+      <p style="color:#888;font-size:.95rem;max-width:500px;margin:0 auto">Authentic teas from India's finest gardens • Single & Bulk orders welcome</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="product-grid" id="teaGrid"></div>
+      <!-- Return Policy Tea -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:3rem">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:.75rem">Return Policy — Tea</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:13px">
+          <div style="padding:1rem;background:#f0fff6;border-radius:8px;border-left:3px solid #2D7A4F"><strong>Returns Accepted:</strong><br>• Expired tea received<br>• Poor smell / quality issue<br>• Damaged packaging</div>
+          <div style="padding:1rem;background:#fff0f0;border-radius:8px;border-left:3px solid #e74c3c"><strong>Not Accepted:</strong><br>• Change of mind<br>• No exchange option<br>• After 7 days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: AFFILIATE ===================== -->
+<div class="page" id="page-affiliate">
+  <div style="background:#000;padding:5rem 2rem 4rem;text-align:center">
+    <div style="font-size:11px;letter-spacing:.15em;color:var(--rg);text-transform:uppercase;margin-bottom:.5rem">Earn With Us</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;margin-bottom:.75rem">Affiliate & Dropshipping</div>
+    <p style="color:#888;font-size:.95rem;max-width:500px;margin:0 auto">Sell our products without holding stock. Set your own price. Earn unlimited.</p>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+      <button class="btn-primary" onclick="showPage('dropship')">Join Dropshipping →</button>
+      <button class="btn-outline" onclick="document.getElementById('affProds').scrollIntoView({behavior:'smooth'})">View Products</button>
+    </div>
+  </div>
+  <div class="section" id="affProds">
+    <div class="section-inner">
+      <div class="section-label">Available Products</div>
+      <div class="section-title">Choose What You Want to Promote</div>
+      <div class="affiliate-grid" id="affiliateGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: DROPSHIPPING ===================== -->
+<div class="page" id="page-dropship">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Join Our Network</div>
+      <div class="section-title">Dropshipping Program</div>
+      <p class="section-sub">Sell Stepy Solutions footwear & tea without buying stock. Our price is fixed — you promote at your own price and earn the difference.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:3rem">
+        <div style="padding:1.5rem;background:#fff;border:1px solid var(--border);border-radius:10px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">📦</div>
+          <div style="font-size:.9rem;font-weight:500">No Stock Required</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:.25rem">We handle inventory & shipping</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border:1px solid var(--border);border-radius:10px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">💰</div>
+          <div style="font-size:.9rem;font-weight:500">Set Your Own Price</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:.25rem">Earn above our fixed price</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border:1px solid var(--border);border-radius:10px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">🚚</div>
+          <div style="font-size:.9rem;font-weight:500">We Ship Directly</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:.25rem">Pan India delivery handled</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border:1px solid var(--border);border-radius:10px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">📱</div>
+          <div style="font-size:.9rem;font-weight:500">WhatsApp Support</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:.25rem">Full seller support 8am–10pm</div>
+        </div>
+      </div>
+      <div class="drop-form">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.5rem">Join Dropshipping Program</h3>
+        <p style="font-size:12px;color:var(--gray);margin-bottom:1.5rem">Fill the form below and we'll onboard you within 24 hours via WhatsApp.</p>
+        <div class="form-group"><label>Full Name *</label><input type="text" id="ds_name" placeholder="Your full name"></div>
+        <div class="form-group"><label>WhatsApp Number *</label><input type="tel" id="ds_phone" placeholder="10 digit number"></div>
+        <div class="form-group"><label>City / State</label><input type="text" id="ds_city" placeholder="Your city"></div>
+        <div class="form-group"><label>Products You Want to Sell</label>
+          <select id="ds_products" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px">
+            <option value="both">Footwear & Tea (Both)</option>
+            <option value="footwear">Footwear Only</option>
+            <option value="tea">Tea Only</option>
+          </select>
+        </div>
+        <div class="form-group"><label>How will you promote?</label><textarea id="ds_promote" rows="2" placeholder="Social media, WhatsApp groups, website etc." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px"></textarea></div>
+        <button class="pay-btn" onclick="submitDropship()">Submit Application via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: TESTIMONIALS ===================== -->
+<div class="page" id="page-testimonials">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Client Success Stories</div>
+      <div class="section-title">Real Results. Real Sellers.</div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:2rem">All seller names/firm names are blurred to protect privacy. Screenshots are authentic.</p>
+      <div class="testi-grid" id="testiGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: ABOUT ===================== -->
+<div class="page" id="page-about">
+  <div class="section">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">About The Founder</div>
+          <div class="section-title">Mohammed Hasnain</div>
+          <hr class="gold">
+          <p style="font-size:.95rem;line-height:1.9;color:#444;margin-bottom:1.5rem">With deep expertise in Indian e-commerce across 15+ platforms and hands-on experience in global marketplaces like Etsy, eBay, and Noon — I started Stepy Solutions to give Indian sellers a genuine, all-in-one partner for their e-commerce journey.</p>
+          <p style="font-size:.95rem;line-height:1.9;color:#444;margin-bottom:1.5rem">My specialization spans the complete seller lifecycle — from GST registration and FSSAI licensing to PPC campaigns, AI creatives, return management, and international expansion. Based in Jaipur, we serve sellers across India and globally.</p>
+          <div class="expertise-chips">
+            <span class="chip">Amazon Expert</span><span class="chip">Flipkart Certified</span><span class="chip">GST Specialist</span><span class="chip">Trademark Filing</span><span class="chip">IEC & Export</span><span class="chip">PPC & Ads</span><span class="chip">AI Creatives</span><span class="chip">Quick Commerce</span><span class="chip">Etsy & eBay</span>
+          </div>
+        </div>
+        <div class="about-img-wrap">
+          <div class="about-img-box">
+            <div style="text-align:center;z-index:1;position:relative">
+              <div style="font-size:4rem;margin-bottom:.5rem">👨‍💼</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rg)">Mohammed Hasnain</div>
+              <div style="font-size:12px;color:#888;margin-top:.25rem">E-commerce Consultant</div>
+            </div>
+          </div>
+          <div class="about-quote">"Registration se Revenue tak — har step par aapke saath"</div>
+        </div>
+      </div>
+      <!-- Freelancing Profiles -->
+      <div style="margin-top:4rem">
+        <div class="section-label">Freelancing Profiles</div>
+        <div class="section-title" style="font-size:1.8rem">Find Me Online</div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+          <a href="https://www.fiverr.com" target="_blank" class="social-link">🟢 Fiverr</a>
+          <a href="https://www.upwork.com" target="_blank" class="social-link">🔵 Upwork</a>
+          <a href="https://www.freelancer.com" target="_blank" class="social-link">🟡 Freelancer</a>
+          <a href="https://www.guru.com" target="_blank" class="social-link">🟣 Guru</a>
+          <a href="https://www.linkedin.com" target="_blank" class="social-link">💼 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: CONTACT ===================== -->
+<div class="page" id="page-contact">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Get In Touch</div>
+      <div class="section-title">Customer Support</div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>हम आपकी मदद के लिए तैयार हैं। नीचे दिए गए options से हमसे connect करें।</p>
+          <div class="contact-item"><span class="icon">📍</span><span>Jagannath Shah Marg, Ramganj Bazar, Jaipur – 302003, Rajasthan, India</span></div>
+          <div class="contact-item"><span class="icon">📞</span><span>+91 7424932963 (Mohammed Hasnain)</span></div>
+          <div class="contact-item"><span class="icon">📧</span><span>stepysolutions@gmail.com</span></div>
+          <div class="contact-item"><span class="icon">🕐</span>
+            <div>
+              <div>Free Support (Indian Platforms): <strong>9 AM – 3 PM</strong></div>
+              <div style="margin-top:.25rem">WhatsApp Chat: <strong>8 AM – 10 PM</strong></div>
+              <div class="timing-badge">Free call support for Indian marketplace queries only</div>
+            </div>
+          </div>
+
+          <!-- Support Buttons -->
+          <div class="support-btns">
+            <button class="sup-btn wa" onclick="openWA('support')">💬 WhatsApp Chat (8am–10pm)</button>
+            <button class="sup-btn call" onclick="window.location.href='tel:7424932963'">📞 Call Support (9am–3pm)</button>
+          </div>
+          <div style="margin-top:1rem">
+            <div style="font-size:12px;color:var(--gray);margin-bottom:.5rem">Paid Consultation Call (30 min • 3PM–5PM)</div>
+            <button class="sup-btn paid-call" onclick="startPaidCall()">💰 Book Paid Call ₹200 (3PM–5PM • 9468883804)</button>
+            <div class="timing-badge paid">Paid: ₹200 for 30 min • Pay first, then call</div>
+          </div>
+
+          <!-- Account Health FREE -->
+          <div style="margin-top:1.5rem;background:#f0fff6;border:1px solid #c3e6cb;border-radius:10px;padding:1rem">
+            <div style="font-size:13px;font-weight:500;color:#2D7A4F;margin-bottom:.25rem">✅ Free Account Health Check</div>
+            <div style="font-size:12px;color:#555">Send your seller account screenshot on WhatsApp — we'll review & respond during business hours. No charge!</div>
+            <button class="sup-btn wa" style="margin-top:.75rem;font-size:12px;padding:8px 16px" onclick="openWA('health')">Send for Free Health Check</button>
+          </div>
+
+          <!-- Social Media -->
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" class="social-link">📸 Instagram</a>
+            <a href="https://facebook.com" target="_blank" class="social-link">📘 Facebook</a>
+            <a href="https://youtube.com" target="_blank" class="social-link">▶️ YouTube</a>
+            <a href="https://twitter.com" target="_blank" class="social-link">🐦 Twitter/X</a>
+            <a href="https://linkedin.com" target="_blank" class="social-link">💼 LinkedIn</a>
+          </div>
+        </div>
+        <div>
+          <div class="contact-form">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.5rem">Send a Message</h3>
+            <input type="text" id="cnt_name" placeholder="Your name *">
+            <input type="tel" id="cnt_phone" placeholder="WhatsApp number *">
+            <input type="email" id="cnt_email" placeholder="Email (optional)">
+            <textarea id="cnt_msg" rows="4" placeholder="Your query..." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px"></textarea>
+            <button class="pay-btn" style="margin-top:.5rem" onclick="sendContactWA()">Send via WhatsApp →</button>
+          </div>
+          <!-- Map placeholder -->
+          <div style="margin-top:1.5rem;background:#f5f5dc;border-radius:12px;height:200px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-direction:column;gap:.5rem;cursor:pointer" onclick="window.open('https://maps.google.com/?q=Jagannath+Shah+Marg+Ramganj+Bazar+Jaipur','_blank')">
+            <div style="font-size:2rem">📍</div>
+            <div style="font-size:13px;font-weight:500">View on Google Maps</div>
+            <div style="font-size:11px;color:var(--gray)">Jagannath Shah Marg, Ramganj Bazar, Jaipur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: POLICIES ===================== -->
+<div class="page" id="page-policy">
+  <div class="section">
+    <div class="section-inner policy-content">
+      <div class="section-label">Legal</div>
+      <div class="section-title">Policies & Legal Documents</div>
+      <div class="policy-tabs">
+        <button class="p-tab active" onclick="showPolicy('privacy',this)">Privacy Policy</button>
+        <button class="p-tab" onclick="showPolicy('payment',this)">Payment Policy</button>
+        <button class="p-tab" onclick="showPolicy('delivery',this)">Delivery Policy</button>
+        <button class="p-tab" onclick="showPolicy('data',this)">Data Policy</button>
+        <button class="p-tab" onclick="showPolicy('security',this)">Security</button>
+        <button class="p-tab" onclick="showPolicy('tc',this)">T&C</button>
+        <button class="p-tab" onclick="showPolicy('refund',this)">Refund Policy</button>
+        <button class="p-tab" onclick="showPolicy('nda',this)">NDA</button>
+      </div>
+      <div id="policyContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: ADMIN ===================== -->
+<div class="page" id="page-admin">
+  <div class="section">
+    <div class="section-inner">
+      <div id="adminLogin" style="max-width:400px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:16px;padding:2.5rem;text-align:center">
+        <div style="font-size:3rem;margin-bottom:1rem">🔐</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:1.5rem">Admin Panel</h2>
+        <div class="form-group"><label>Username</label><input type="text" id="adminUser" placeholder="admin"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="adminPass" placeholder="••••••"></div>
+        <button class="pay-btn" onclick="adminLogin()">Login to Admin Panel</button>
+      </div>
+      <div id="adminDash" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem">Admin Panel</div>
+            <div style="font-size:12px;color:var(--gray)">Stepy Solutions Management</div>
+          </div>
+          <button onclick="adminLogout()" style="padding:8px 16px;background:#000;color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px">Logout</button>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-sidebar">
+            <h3>Management</h3>
+            <ul class="admin-menu" id="adminMenu">
+              <li class="active" onclick="showAdminPanel('testimonials',this)">⭐ Testimonials</li>
+              <li onclick="showAdminPanel('products',this)">📦 Products</li>
+              <li onclick="showAdminPanel('plans',this)">💼 Plans</li>
+              <li onclick="showAdminPanel('services_mgmt',this)">🛠 Services</li>
+              <li onclick="showAdminPanel('affiliate_mgmt',this)">🤝 Affiliate Items</li>
+              <li onclick="showAdminPanel('orders',this)">📋 Orders</li>
+              <li onclick="showAdminPanel('settings',this)">⚙️ Settings</li>
+            </ul>
+          </div>
+          <div class="admin-content">
+            <!-- Testimonials Panel -->
+            <div class="admin-panel active" id="ap-testimonials">
+              <h3>Manage Testimonials</h3>
+              <div style="background:#f9f9f4;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem">
+                <div style="font-size:.9rem;font-weight:500;margin-bottom:1rem">Add New Testimonial</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                  <div class="form-group"><label>Seller Type (e.g. Footwear Seller)</label><input type="text" id="t_platform" class="admin-input" placeholder="Platform & seller type"></div>
+                  <div class="form-group"><label>Stars (1-5)</label><input type="number" id="t_stars" class="admin-input" min="1" max="5" value="5"></div>
+                </div>
+                <div class="form-group"><label>Review Text</label><textarea id="t_text" class="admin-input" rows="2" placeholder="Client review..."></textarea></div>
+                <div class="form-group"><label>Screenshot URL (blurred image)</label><input type="text" id="t_img" class="admin-input" placeholder="Image URL or leave blank"></div>
+                <button class="admin-btn gold" onclick="addTestimonial()">Add Testimonial</button>
+              </div>
+              <div id="testiAdminList"></div>
+            </div>
+            <!-- Products Panel -->
+            <div class="admin-panel" id="ap-products">
+              <h3>Manage Products (Footwear & Tea)</h3>
+              <div style="display:flex;gap:.5rem;margin-bottom:1.5rem">
+                <button class="admin-btn active" onclick="switchProductTab('footwear',this)" id="pt-fw">Footwear</button>
+                <button class="admin-btn" onclick="switchProductTab('tea',this)" id="pt-tea" style="background:#555">Tea</button>
+              </div>
+              <div id="productAdminList"></div>
+              <div style="background:#f9f9f4;border-radius:8px;padding:1.5rem;margin-top:1.5rem">
+                <div style="font-size:.9rem;font-weight:500;margin-bottom:1rem">Add New Product</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+                  <input type="text" id="p_name" class="admin-input" placeholder="Product name">
+                  <input type="number" id="p_price" class="admin-input" placeholder="Price (₹)">
+                  <input type="text" id="p_cat" class="admin-input" placeholder="Category (mens/womens/kids/bulk/green/black)">
+                  <input type="text" id="p_badge" class="admin-input" placeholder="Badge (New, Hot, etc.)">
+                  <input type="text" id="p_emoji" class="admin-input" placeholder="Emoji (👟)">
+                  <input type="number" id="p_mrp" class="admin-input" placeholder="MRP / Original price">
+                </div>
+                <input type="hidden" id="p_type" value="footwear">
+                <button class="admin-btn gold" style="margin-top:.75rem" onclick="addProduct()">Add Product</button>
+              </div>
+            </div>
+            <!-- Plans Panel -->
+            <div class="admin-panel" id="ap-plans">
+              <h3>Manage Plans</h3>
+              <div id="plansAdminList"></div>
+            </div>
+            <!-- Services Panel -->
+            <div class="admin-panel" id="ap-services_mgmt">
+              <h3>Manage Services</h3>
+              <p style="font-size:12px;color:var(--gray);margin-bottom:1rem">Toggle visibility of any service:</p>
+              <div id="servicesAdminList"></div>
+            </div>
+            <!-- Affiliate Panel -->
+            <div class="admin-panel" id="ap-affiliate_mgmt">
+              <h3>Manage Affiliate Products</h3>
+              <div id="affAdminList"></div>
+              <div style="background:#f9f9f4;border-radius:8px;padding:1.5rem;margin-top:1.5rem">
+                <div style="font-size:.9rem;font-weight:500;margin-bottom:.75rem">Add Affiliate Product</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+                  <input type="text" id="af_name" class="admin-input" placeholder="Product name">
+                  <input type="number" id="af_price" class="admin-input" placeholder="Our price (₹)">
+                  <input type="text" id="af_earn" class="admin-input" placeholder="Earn (e.g. ₹100-500)">
+                  <input type="text" id="af_emoji" class="admin-input" placeholder="Emoji">
+                </div>
+                <button class="admin-btn gold" style="margin-top:.75rem" onclick="addAffProduct()">Add Product</button>
+              </div>
+            </div>
+            <!-- Orders Panel -->
+            <div class="admin-panel" id="ap-orders">
+              <h3>Orders & Inquiries</h3>
+              <div id="ordersAdminList"></div>
+            </div>
+            <!-- Settings Panel -->
+            <div class="admin-panel" id="ap-settings">
+              <h3>Site Settings</h3>
+              <div style="display:grid;gap:1rem">
+                <div class="form-group"><label>WhatsApp Number</label><input type="text" class="admin-input" value="7424932963" id="s_wa"></div>
+                <div class="form-group"><label>Paid Call Number</label><input type="text" class="admin-input" value="9468883804" id="s_paid"></div>
+                <div class="form-group"><label>Email</label><input type="text" class="admin-input" value="stepysolutions@gmail.com" id="s_email"></div>
+                <button class="admin-btn gold" onclick="saveSettings()">Save Settings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Stepy<span> Solutions</span></div>
+      <p class="footer-desc">Registration se Revenue tak — India's premium e-commerce management agency. Jaipur based, serving pan-India and global markets.</p>
+      <div style="font-size:11px;color:#555">📍 Jagannath Shah Marg, Ramganj Bazar, Jaipur 302003<br>📞 7424932963 • 📧 stepysolutions@gmail.com</div>
+    </div>
+    <div>
+      <div class="footer-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('plans')">Plans & Pricing</a></li>
+        <li><a href="#" onclick="showPage('services')">All Services</a></li>
+        <li><a href="#" onclick="showPage('footwear')">Footwear Shop</a></li>
+        <li><a href="#" onclick="showPage('tea')">Tea Shop</a></li>
+        <li><a href="#" onclick="showPage('affiliate')">Affiliate</a></li>
+        <li><a href="#" onclick="showPage('dropship')">Dropshipping</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+        <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact & Support</a></li>
+        <li><a href="#" onclick="showPage('policy')">Policies</a></li>
+        <li><a href="#" onclick="showPage('admin')">Admin Login</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-title">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('policy');showPolicy('privacy')">Privacy Policy</a></li>
+        <li><a href="#" onclick="showPage('policy');showPolicy('tc')">Terms & Conditions</a></li>
+        <li><a href="#" onclick="showPage('policy');showPolicy('refund')">Refund Policy</a></li>
+        <li><a href="#" onclick="showPage('policy');showPolicy('delivery')">Delivery Policy</a></li>
+        <li><a href="#" onclick="showPage('policy');showPolicy('nda')">NDA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Stepy Solutions. All rights reserved. Mohammed Hasnain.</span>
+    <span>Made with ❤️ in Jaipur, Rajasthan</span>
+  </div>
+</footer>
+
+<script>
+// ===== DATA STORE =====
+let DB = {
+  plans:[
+    {id:'starter',name:'Starter',price:999,commission:2,desc:'Perfect for new sellers starting their journey',accounts:'1 Account',color:'',popular:false,features:['1 Seller Account Managed','Full Account Setup & Onboarding','Up to 100 Product Listings','Basic SEO & Keyword Optimization','Monthly Account Health Report','GST Filing Support (Basic)','WhatsApp Support (9am–3pm)','Free Account Health Check','1 Platform (your choice)','WhatsApp Marketplace Alerts'],notIncluded:['PPC Ad Campaigns','P&L Reports','AI Creatives','5+ Accounts']},
+    {id:'growth',name:'Growth',price:2499,commission:1.5,desc:'For growing sellers scaling their business',accounts:'2–3 Accounts',color:'',popular:true,features:['2–3 Seller Accounts Managed','Full Setup + 250 SKU Listings','PPC Campaign Management','Monthly P&L Report','A+ Content (Top 10 Products)','GST Filing + TCS Reconciliation','Return Rate Monitoring','Competitor Analysis (Monthly)','Priority WhatsApp Support','Festive Season Strategy','WhatsApp Marketplace Alerts'],notIncluded:['AI Creatives (Add-on)','5+ Accounts']},
+    {id:'enterprise',name:'Enterprise',price:4999,commission:1,desc:'Full-scale management for serious sellers',accounts:'5+ Accounts',color:'',popular:false,features:['5+ Seller Accounts Managed','Unlimited Listings & Cataloguing','Full PPC + Advanced Ad Strategy','AI Creatives — Images & Videos','Brand Story & A+ Content','Full GST, ITR & Legal Support','Festive Campaign Strategy','Weekly KPI Scorecard','Dedicated Account Manager','Bank-Platform Payment Reconciliation','Accounting on Busy Software (Add-on available)','WhatsApp Marketplace Alerts'],notIncluded:[]}
+  ],
+  addons:[
+    {name:'Global Expansion',desc:'Etsy, eBay, Noon, Amazon Global — IEC, AD Code, Payoneer, ICEgate, LUT, Shipping Setup',price:'₹4,000/mo',icon:'🌍'},
+    {name:'Tax & Accounting Add-on',desc:'GST Monthly/Quarterly filing + Income Tax ITR + 25% of claim refund. Available on all plans.',price:'₹1,000/mo + 25% claim refund (+ ₹500 fee)',icon:'📊'},
+    {name:'Busy Accounting Software',desc:'Full accounting management on Busy software. Monthly reconciliation & reports.',price:'₹999/mo',icon:'💹'},
+    {name:'AI Agent Setup',desc:'Basic AI chatbot/agent creation for your business. One-time setup.',price:'₹5,000 one-time',icon:'🤖'},
+    {name:'Paid Consultation Call',desc:'30-min expert call 3PM–5PM. Ask anything about e-commerce, strategy, or growth.',price:'₹200 / 30 min',icon:'📞'},
+    {name:'Label Printing (Jaipur Only)',desc:'All type shipping labels printed. Jaipur delivery only. Bulk discounts available.',price:'Call to quote',icon:'🏷️'},
+    {name:'Website & Digital Presence',desc:'Landing page, Google Business Profile, WhatsApp Business listing, Social Media accounts setup & management.',price:'₹2,000+/mo',icon:'🌐'},
+    {name:'Social Media Management',desc:'Instagram, Facebook posts, reels, stories — 10 posts/month.',price:'₹1,500/mo',icon:'📱'}
+  ],
+  services:{
+    'Onboarding & Setup':[
+      {no:1,name:'Seller Account Registration',desc:'Meesho, Flipkart, Amazon, Myntra etc.',price:'₹500 + Govt fee',planFree:true},
+      {no:2,name:'GST Registration',desc:'Complete process + certificate',price:'₹500 + Govt fee',planFree:false},
+      {no:3,name:'Trademark Registration',desc:'Class-wise filing & follow-up',price:'₹500 + Govt fee',planFree:false},
+      {no:4,name:'IEC Code (Import-Export)',desc:'DGFT portal application',price:'₹500 + Govt fee',planFree:false},
+      {no:5,name:'AD Code Letter',desc:'Bank coordination for exporters',price:'₹500 + Govt fee',planFree:false},
+      {no:6,name:'FSSAI / Food Licence',desc:'Basic, State & Central',price:'₹500 + Govt fee',planFree:false},
+      {no:7,name:'Brand Approval on Platform',desc:'Brand Registry & category approval',price:'₹500 + Govt fee',planFree:true},
+      {no:8,name:'Warehouse / Fulfillment Setup',desc:'FBA, FMF, Flipkart Fulfillment',price:'₹500',planFree:true},
+      {no:9,name:'Bank Account Linking',desc:'Seller payment & payout setup',price:'₹500',planFree:true},
+      {no:10,name:'Quick Commerce Onboarding',desc:'Blinkit, Zepto, Instamart, Toing',price:'₹500 + Govt fee',planFree:true}
+    ],
+    'SEO & Listing':[
+      {no:11,name:'Product Listing (Bulk)',desc:'Up to 500 SKUs with attributes',price:'₹1,000 + ₹25/SKU (₹75/variation)',planFree:true},
+      {no:12,name:'Keyword Research & SEO',desc:'Title, bullets, search terms',price:'₹1,000',planFree:true},
+      {no:13,name:'A+ Content / Rich Content',desc:'Brand story & enhanced pages',price:'₹1,000',planFree:true},
+      {no:14,name:'Catalogue Error Fix',desc:'Suppressed listings & violations',price:'₹1,000',planFree:true},
+      {no:15,name:'Category & Attribute Mapping',desc:'Correct taxonomy for visibility',price:'₹1,000',planFree:true},
+      {no:16,name:'Variation Listing Setup',desc:'Size-color matrix & parent-child',price:'₹1,000 + ₹75/variation',planFree:true},
+      {no:17,name:'Pricing Strategy & MRP',desc:'Competitive analysis + MOP control',price:'₹1,000',planFree:true},
+      {no:18,name:'Review & Rating Strategy',desc:'Ethical review generation plan',price:'₹1,000',planFree:true},
+      {no:19,name:'Inventory Management Setup',desc:'Auto replenishment & stock sync',price:'₹1,000',planFree:true},
+      {no:20,name:'Storefront / Brand Page',desc:'Flipkart Brand Hub, Amazon Store',price:'₹1,000',planFree:true}
+    ],
+    'AI & Creative':[
+      {no:21,name:'Product Photography Guidance',desc:'Brief for white-bg & lifestyle shots',price:'₹500 + work charges',planFree:true},
+      {no:22,name:'AI Image Enhancement',desc:'Background removal, retouch',price:'₹500 + work charges',planFree:true},
+      {no:23,name:'Infographic Creation',desc:'Size charts, USP banners, how-to',price:'₹500 + work charges',planFree:true},
+      {no:24,name:'Product Video (Reel/Short)',desc:'30-60 sec listing & social video',price:'₹500 + work charges',planFree:true},
+      {no:25,name:'Brand Logo & Identity',desc:'Logo, color palette, brand kit',price:'₹500 + work charges',planFree:true},
+      {no:26,name:'Packaging Design',desc:'Box, label, tag, poly-bag design',price:'₹500 + work charges',planFree:true},
+      {no:27,name:'Social Media Content Pack',desc:'10 posts/month',price:'₹500 + work charges',planFree:true},
+      {no:28,name:'AI Copywriting (Bilingual)',desc:'Hindi + English descriptions',price:'₹500 + work charges',planFree:true},
+      {no:29,name:'360° Product Spin Video',desc:'Interactive view for premium listings',price:'₹500 + work charges',planFree:true},
+      {no:30,name:'Catalogue PDF / Lookbook',desc:'B2B-ready digital catalogue',price:'₹500 + work charges',planFree:true},
+      {no:'3A',name:'Image Optimisation',desc:'Platform-specific image sizing & quality',price:'₹500 + work charges',planFree:true}
+    ],
+    'Growth & Ads':[
+      {no:31,name:'Sponsored Product Campaigns',desc:'Amazon, Flipkart Ads setup',price:'₹800 + ₹50 per ₹1000 spend above ₹1000',planFree:true},
+      {no:32,name:'PPC Audit & Optimization',desc:'ACOS/ROAS reduction strategy',price:'₹800',planFree:true},
+      {no:33,name:'Sponsored Brand / Display Ads',desc:'Video & headline search ads',price:'₹800',planFree:true},
+      {no:34,name:'Deal & Coupon Management',desc:'Flash deals, Big Billion, GOSF prep',price:'₹800',planFree:true},
+      {no:35,name:'Monthly P&L Report',desc:'Revenue, returns, net margin',price:'₹800',planFree:true},
+      {no:36,name:'Competitor Analysis',desc:'Price benchmarking & gap hunting',price:'₹800',planFree:true},
+      {no:37,name:'Festive Season Strategy',desc:'Navratri, Diwali, New Year planning',price:'₹800',planFree:true},
+      {no:38,name:'Influencer / Affiliate Tie-ups',desc:'Meesho reseller & Amazon influencer',price:'₹800',planFree:true},
+      {no:39,name:'Platform Growth Scorecard',desc:'Weekly KPIs: traffic, CTR, conversion',price:'₹800',planFree:true},
+      {no:40,name:'Launch Strategy (New Product)',desc:'Honeymoon period optimization',price:'₹800',planFree:true},
+      {no:41,name:'Rating Tips & Strategy',desc:'Improve seller ratings & feedback',price:'₹800',planFree:true}
+    ],
+    'Tax & Legal':[
+      {no:42,name:'GST Monthly/Quarterly Filing',desc:'GSTR-1, GSTR-3B, GSTR-9',price:'Call to discuss',planFree:false},
+      {no:43,name:'ITR Filing',desc:'ITR-3, ITR-4 for business sellers',price:'Call to discuss',planFree:false},
+      {no:44,name:'TDS / TCS Reconciliation',desc:'Platform TCS reconciliation',price:'Call to discuss',planFree:false},
+      {no:45,name:'E-way Bill Management',desc:'Bulk generation & compliance',price:'Call to discuss',planFree:false},
+      {no:46,name:'MSME / Udyam Registration',desc:'Priority for Udyam benefits',price:'₹500 + Govt fee',planFree:false},
+      {no:47,name:'NDA & Business Agreements',desc:'Client, vendor & agency agreements',price:'Call to discuss',planFree:false},
+      {no:48,name:'Privacy Policy & T&C Drafting',desc:'Website + platform compliance',price:'Call to discuss',planFree:false},
+      {no:49,name:'IP Protection / Copyright',desc:'Copyright filing for creatives',price:'Call to discuss',planFree:false},
+      {no:50,name:'Bank-Platform Reconciliation',desc:'Ecommerce payment reconciliation',price:'Call to discuss',planFree:false}
+    ],
+    'Trademark Services':[
+      {no:51,name:'Unique Brand Name Finding',desc:'Research & suggest registrable brand names',price:'₹500 + Govt fee',planFree:false},
+      {no:52,name:'Logo Design for Trademark',desc:'Trademark-ready logo creation',price:'₹500 + work charges',planFree:false},
+      {no:53,name:'Trademark Search & Clearance',desc:'Verify name availability before filing',price:'₹500 + Govt fee',planFree:false},
+      {no:54,name:'Trademark Filing',desc:'Class-wise trademark application',price:'₹500 + Govt fee',planFree:false},
+      {no:55,name:'Trademark Monitoring',desc:'Watch for conflicts & objections',price:'₹500/month',planFree:false}
+    ],
+    'Account Health & Support':[
+      {no:56,name:'Account Health Monitoring',desc:'Daily dashboard review',price:'₹500',planFree:true},
+      {no:57,name:'Suspension Appeal (POA)',desc:'Plan of Action drafting & filing',price:'₹500',planFree:true},
+      {no:58,name:'Policy Violation Resolution',desc:'IP complaints, counterfeit cases',price:'₹500',planFree:true},
+      {no:59,name:'Customer Escalation Handling',desc:'Negative review & A-to-Z response',price:'₹500',planFree:true},
+      {no:60,name:'Order & Shipment Monitoring',desc:'SLA compliance & dispatch fix',price:'₹500',planFree:true},
+      {no:61,name:'WhatsApp Support Channel',desc:'Dedicated WA for clients',price:'Free for plan buyers',planFree:true},
+      {no:62,name:'Monthly Strategy Report',desc:'Monthly review & recommendations',price:'₹500',planFree:true}
+    ],
+    'Quality & Returns':[
+      {no:63,name:'Return Rate Analysis',desc:'Root cause: size, quality, expectation',price:'₹500',planFree:true},
+      {no:64,name:'Return Dispute Filing',desc:'Fraudulent & wrong returns appeal',price:'₹500',planFree:true},
+      {no:65,name:'Quality SOPs for Packaging',desc:'Checklist to reduce returns',price:'₹500',planFree:true},
+      {no:66,name:'Lost & Damaged Claim Filing',desc:'Warehouse damage reimbursements',price:'₹500',planFree:true},
+      {no:67,name:'Replacement / Refund SOP',desc:'Branded unboxing experience',price:'₹500',planFree:true},
+      {no:68,name:'Seller Score Improvement',desc:'Ratings, RTO%, cancellation mgmt',price:'₹500',planFree:true}
+    ],
+    'Global Marketplace Services':[
+      {no:69,name:'AD Code Letter',desc:'Bank coordination for international payments',price:'₹500 + Govt fee',planFree:false},
+      {no:70,name:'IEC Code Application',desc:'Import-Export Code from DGFT',price:'₹500 + Govt fee',planFree:false},
+      {no:71,name:'Payoneer Account Setup',desc:'Global payment account for Etsy/eBay',price:'₹500',planFree:false},
+      {no:72,name:'International Shipping Setup',desc:'Courier integration & shipping rates',price:'₹500',planFree:false},
+      {no:73,name:'ICEgate Registration',desc:'Customs portal setup for exports',price:'₹500 + Govt fee',planFree:false},
+      {no:74,name:'LUT Filing',desc:'Letter of Undertaking for zero-rated exports',price:'₹500 + Govt fee',planFree:false},
+      {no:75,name:'Etsy Store Setup & Listing',desc:'Full Etsy account + 50 listings',price:'₹2,000',planFree:false},
+      {no:76,name:'eBay Store Setup & Listing',desc:'Full eBay account + 50 listings',price:'₹2,000',planFree:false}
+    ],
+    'Product Research':[
+      {no:77,name:'Product Research with Paid Tools',desc:'Demand analysis using Jungle Scout, Helium10, etc.',price:'₹300/product',planFree:false},
+      {no:78,name:'Trend Analysis & Forecasting',desc:'Seasonal & search trend analysis',price:'₹300/product',planFree:false},
+      {no:79,name:'New Product Launch Strategy',desc:'Complete launch plan with pricing & positioning',price:'₹300/product',planFree:false}
+    ],
+    'Custom Request':[
+      {no:80,name:'Custom Problem Solving — #62',desc:'Tailor-made solution for any e-commerce challenge',price:'Call to discuss',planFree:false}
+    ]
+  },
+  testimonials:[
+    {text:'Stepy Solutions ne hamare Amazon account ka PPC optimize kiya aur hamare ACOS 45% se 18% par aa gaya. Bahut achha kaam!',platform:'Amazon Seller',stars:5,blurred:true},
+    {text:'GST registration se lekar Flipkart onboarding tak — sab kuch ek jagah mila. Mohammed bhai ka support outstanding hai!',platform:'Flipkart Seller',stars:5,blurred:true},
+    {text:'Meesho account suspend ho gayi thi, POA ek hafte mein resolve ho gayi. Bahut relief mila. Highly recommend!',platform:'Meesho Seller',stars:5,blurred:true},
+    {text:'Return rate 28% se 8% par aayi packaging SOP aur better images ki wajah se. Real results!',platform:'Multi-Platform Seller',stars:5,blurred:true}
+  ],
+  products:{
+    footwear:[
+      {id:1,name:'Classic Leather Oxford (Men)',price:899,mrp:1499,cat:'mens',emoji:'👞',badge:'Best Seller'},
+      {id:2,name:'Sports Running Shoes (Men)',price:1299,mrp:2199,cat:'mens',emoji:'👟',badge:'New'},
+      {id:3,name:'Block Heel Sandals (Women)',price:749,mrp:1299,cat:'womens',emoji:'👡',badge:'Trending'},
+      {id:4,name:'Casual Flats (Women)',price:599,mrp:999,cat:'womens',emoji:'🥿',badge:''},
+      {id:5,name:'Kids Velcro Shoes',price:449,mrp:799,cat:'kids',emoji:'👟',badge:'Hot'},
+      {id:6,name:'Bulk Wholesale Pack (24 pairs)',price:8999,mrp:15999,cat:'bulk',emoji:'📦',badge:'Bulk'}
+    ],
+    tea:[
+      {id:1,name:'Darjeeling First Flush',price:499,mrp:799,cat:'black',emoji:'🍵',badge:'Premium'},
+      {id:2,name:'Assam CTC Strong Brew',price:299,mrp:499,cat:'black',emoji:'☕',badge:'Best Seller'},
+      {id:3,name:'Green Tea — Himalayan',price:399,mrp:649,cat:'green',emoji:'🟢',badge:'Healthy'},
+      {id:4,name:'Masala Chai Blend',price:349,mrp:599,cat:'black',emoji:'🫖',badge:'Hot'},
+      {id:5,name:'Bulk Tea (1 kg)',price:1499,mrp:2499,cat:'bulk',emoji:'📦',badge:'Bulk'}
+    ]
+  },
+  affiliateProducts:[
+    {name:'Leather Oxford Shoes',price:599,earn:'₹100-500',emoji:'👞'},
+    {name:'Sports Running Shoes',price:899,earn:'₹150-600',emoji:'👟'},
+    {name:'Block Heel Sandals',price:499,earn:'₹80-400',emoji:'👡'},
+    {name:'Darjeeling First Flush Tea',price:299,earn:'₹50-200',emoji:'🍵'},
+    {name:'Assam CTC Tea (bulk)',price:999,earn:'₹150-500',emoji:'☕'}
+  ],
+  orders:[],
+  cart:[],
+  currentProductTab:'footwear'
+};
+
+// ===== NAVIGATION =====
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const p=document.getElementById('page-'+id);
+  if(p){p.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  document.getElementById('navLinks').classList.remove('open');
+  if(id==='plans')renderPlans();
+  if(id==='services')renderServices();
+  if(id==='testimonials')renderTestimonials();
+  if(id==='footwear')renderProducts('footwear');
+  if(id==='tea')renderProducts('tea');
+  if(id==='affiliate')renderAffiliate();
+  if(id==='home'){renderHomeTestimonials();renderPlans();}
+  if(id==='policy')showPolicy('privacy');
+  if(id==='admin')renderAdminTestimonials();
+}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+
+// ===== PLANS =====
+function renderPlans(){
+  const g=document.getElementById('plansGrid');
+  if(!g)return;
+  g.innerHTML=DB.plans.map(p=>`
+    <div class="plan-card ${p.popular?'featured':''}">
+      ${p.popular?'<div class="plan-popular">⭐ Most Popular</div>':''}
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-desc">${p.desc} • ${p.accounts}</div>
+      <div class="plan-price"><sup>₹</sup>${p.price.toLocaleString('en-IN')}<span class="mo">/month</span></div>
+      <div class="plan-comm">+ ${p.commission}% commission (on income >₹25,000/mo)</div>
+      <div class="plan-note">Govt fees charged at actuals • 50% advance to start • 7-day refund window</div>
+      <ul class="plan-feats">
+        ${p.features.map(f=>`<li>${f}</li>`).join('')}
+        ${p.notIncluded.map(f=>`<li class="x">${f}</li>`).join('')}
+      </ul>
+      <button class="plan-buy" onclick="buyPlan('${p.id}','${p.name}',${p.price})">Get ${p.name} Plan →</button>
+    </div>
+  `).join('');
+  const ag=document.getElementById('addonsGrid');
+  if(ag)ag.innerHTML=DB.addons.map(a=>`
+    <div class="addon">
+      <div class="addon-icon">${a.icon}</div>
+      <div class="addon-info">
+        <h4>${a.name}</h4>
+        <p>${a.desc}</p>
+        <div class="addon-price">${a.price}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function buyPlan(id,name,price){
+  DB.cart=[{type:'plan',name:`${name} Plan`,price:price,id:id}];
+  openCheckout(false,true);
+}
+
+// ===== SERVICES =====
+let currentCat='Onboarding & Setup';
+function renderServices(){
+  const cats=Object.keys(DB.services);
+  const tabs=document.getElementById('catTabs');
+  if(!tabs)return;
+  tabs.innerHTML=cats.map(c=>`<button class="cat-tab ${c===currentCat?'active':''}" onclick="switchCat('${c}',this)">${c}</button>`).join('');
+  renderSvcGrid();
+}
+function switchCat(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderSvcGrid();
+}
+function renderSvcGrid(){
+  const g=document.getElementById('svcsGrid');
+  if(!g)return;
+  const items=DB.services[currentCat]||[];
+  g.innerHTML=items.map(s=>{
+    const inCart=DB.cart.some(c=>c.id===`svc-${s.no}`);
+    return`<div class="svc-card ${inCart?'in-cart':''}" id="sc-${s.no}">
+      <div class="svc-no">Service #${s.no} ${s.planFree?'<span style="background:#f0fff6;color:#2D7A4F;padding:1px 5px;border-radius:3px;font-size:9px">FREE with plan</span>':''}</div>
+      <div class="svc-name">${s.name}<br><span style="font-size:11px;color:var(--gray);font-weight:400">${s.desc}</span></div>
+      <div class="svc-price">${s.price}</div>
+      <button class="svc-add" onclick="toggleSvcCart(${JSON.stringify(s).replace(/"/g,"'")})">
+        ${inCart?'✓':'+'}
+      </button>
+    </div>`;
+  }).join('');
+}
+function toggleSvcCart(s){
+  const idx=DB.cart.findIndex(c=>c.id===`svc-${s.no}`);
+  if(idx>-1){DB.cart.splice(idx,1);showToast('Removed from cart');}
+  else{DB.cart.push({type:'service',name:s.name,price:s.price,id:`svc-${s.no}`});showToast('Added to cart ✓');}
+  updateCartBar();renderSvcGrid();
+}
+function updateCartBar(){
+  const svcs=DB.cart.filter(c=>c.type==='service');
+  const bar=document.getElementById('cartBar');
+  if(!bar)return;
+  if(svcs.length>0){bar.classList.add('show');}else{bar.classList.remove('show');}
+  document.getElementById('cartCount').textContent=svcs.length;
+  document.getElementById('cartTotal').textContent=`₹${svcs.reduce((s,c)=>{const n=parseInt(c.price.replace(/[^0-9]/g,''))||0;return s+n;},0).toLocaleString('en-IN')}`;
+}
+function openServiceCheckout(){openCheckout(true,false);}
+
+// ===== CHECKOUT =====
+function openCheckout(isService=false,isPlan=false){
+  const modal=document.getElementById('checkoutModal');
+  const addrF=document.getElementById('addressFields');
+  const loginF=document.getElementById('loginFields');
+  if(isService){addrF.style.display='none';loginF.style.display='block';}
+  else{addrF.style.display='block';loginF.style.display='none';}
+  const sum=document.getElementById('checkoutSummary');
+  const items=isPlan?DB.cart:DB.cart.filter(c=>c.type==='service');
+  let total=items.reduce((s,c)=>{const n=parseInt(c.price.replace(/[^0-9]/g,''))||0;return s+n;},0);
+  let advance=Math.round(total*0.5);
+  sum.innerHTML=`
+    <div style="font-size:.85rem;font-weight:500;margin-bottom.75rem">Order Summary</div>
+    ${items.map(i=>`<div class="order-row"><span>${i.name}</span><span class="val">${i.price}</span></div>`).join('')}
+    <div class="order-row"><span>50% Advance (Required to Start)</span><span class="val" style="color:#c0392b">₹${advance.toLocaleString('en-IN')}</span></div>
+    <div class="order-row"><span style="font-weight:500">Amount Due Now</span><span class="val">₹${advance.toLocaleString('en-IN')}</span></div>
+    <div style="font-size:11px;color:var(--gray);margin-top:.5rem">Remaining 50% to be paid after work is delivered.</div>
+  `;
+  modal.classList.add('open');
+}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+function processPayment(){
+  const name=document.getElementById('co_name').value.trim();
+  const phone=document.getElementById('co_phone').value.trim();
+  const email=document.getElementById('co_email').value.trim();
+  const tc=document.getElementById('co_tc').checked;
+  if(!name||!phone||!email){showToast('Please fill all required fields *');return;}
+  if(!tc){showToast('Please accept Terms & Conditions');return;}
+  if(!/^\d{10}$/.test(phone)){showToast('Please enter valid 10-digit mobile number');return;}
+  
+  // Razorpay simulation
+  const items=DB.cart;
+  const total=items.reduce((s,c)=>{const n=parseInt(c.price.replace(/[^0-9]/g,''))||0;return s+n;},0);
+  const advance=Math.round(total*0.5)||999;
+  
+  // In production, load Razorpay script
+  const rzpOpts={
+    key:'rzp_test_xxxxxxxxxxxxxxxx',
+    amount:advance*100,
+    currency:'INR',
+    name:'Stepy Solutions',
+    description:items.map(i=>i.name).join(', '),
+    prefill:{name,email,contact:phone},
+    theme:{color:'#C9A96E'},
+    handler:function(response){
+      onPaymentSuccess({name,phone,email,items,advance,payId:response.razorpay_payment_id||'RZPY'+Date.now()});
+    }
+  };
+  // Try Razorpay if loaded, else simulate
+  if(window.Razorpay){
+    new window.Razorpay(rzpOpts).open();
+  } else {
+    // Simulate for demo
+    onPaymentSuccess({name,phone,email,items,advance,payId:'DEMO'+Date.now()});
+  }
+}
+
+function onPaymentSuccess({name,phone,email,items,advance,payId}){
+  closeModal('checkoutModal');
+  DB.orders.push({name,phone,email,items:items.map(i=>i.name).join(', '),amount:advance,payId,date:new Date().toLocaleDateString()});
+  DB.cart=[];
+  updateCartBar();
+  document.getElementById('successMsg').textContent=`Congratulations ${name}! Your order has been received. Payment ID: ${payId}. We will contact you shortly on ${phone}.`;
+  document.getElementById('successModal').classList.add('open');
+  // WhatsApp notification to owner
+  const ownerMsg=encodeURIComponent(`🛒 *NEW ORDER — Stepy Solutions*\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n📧 Email: ${email}\n📦 Items: ${items.map(i=>i.name).join(', ')}\n💰 Amount Paid: ₹${advance}\n🆔 Payment ID: ${payId}\n📅 Date: ${new Date().toLocaleDateString()}`);
+  setTimeout(()=>{window.open(`https://wa.me/917424932963?text=${ownerMsg}`,'_blank');},1500);
+}
+
+// ===== PRODUCTS =====
+function renderProducts(type){
+  const g=document.getElementById(type==='footwear'?'footwearGrid':'teaGrid');
+  if(!g)return;
+  renderProductGrid(g,type,'all');
+}
+function renderProductGrid(g,type,filter){
+  const prods=DB.products[type].filter(p=>filter==='all'||p.cat===filter);
+  g.innerHTML=prods.map(p=>`
+    <div class="product-card">
+      <div class="product-img">
+        ${p.badge?`<div class="product-badge">${p.badge}</div>`:''}
+        <span style="font-size:4rem">${p.emoji}</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price.toLocaleString('en-IN')}${p.mrp?`<del>₹${p.mrp.toLocaleString('en-IN')}</del>`:''}</div>
+        <div class="product-meta">⚡ ${type==='footwear'?'1-day Jaipur / 3-4 days PAN India':'2-3 days Pan India'}</div>
+        <div class="product-actions">
+          <button class="add-cart-btn" onclick="buyProduct(${JSON.stringify(p).replace(/"/g,"'")},${p.price},'${type}')">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function filterProducts(filter,type){
+  document.querySelectorAll(`[id^="fw-"],[id^="tea-"]`).forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById(`${type==='footwear'?'fw':'tea'}-${filter}`);
+  if(btn)btn.classList.add('active');
+  const g=document.getElementById(type==='footwear'?'footwearGrid':'teaGrid');
+  if(g)renderProductGrid(g,type,filter);
+}
+function buyProduct(p,price,type){
+  DB.cart=[{type:'product',name:p.name,price:`₹${price}`,id:`prod-${p.id}-${type}`}];
+  openCheckout(false,false);
+}
+
+// ===== AFFILIATE =====
+function renderAffiliate(){
+  const g=document.getElementById('affiliateGrid');
+  if(!g)return;
+  g.innerHTML=DB.affiliateProducts.map(p=>`
+    <div class="aff-card">
+      <div class="aff-img">
+        <span>${p.emoji}</span>
+        <div class="aff-earn">${p.earn}</div>
+      </div>
+      <div style="font-size:.9rem;font-weight:500;margin-bottom:.25rem">${p.name}</div>
+      <div style="font-size:12px;color:var(--gray)">Our price: ₹${p.price} • You earn: ${p.earn}</div>
+      <button onclick="showPage('dropship')" style="width:100%;margin-top:.75rem;padding:8px;background:#000;color:#fff;border:0;border-radius:4px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">Join to Promote →</button>
+    </div>
+  `).join('');
+}
+
+// ===== TESTIMONIALS =====
+function renderTestimonials(){
+  const g=document.getElementById('testiGrid');
+  if(!g)return;
+  g.innerHTML=DB.testimonials.map((t,i)=>`
+    <div class="testi">
+      ${t.img?`<div style="width:60px;height:60px;border-radius:8px;overflow:hidden;margin-bottom:1rem"><img src="${t.img}" style="width:100%;height:100%;object-fit:cover;filter:blur(8px)" alt="Seller"></div>`:''}
+      <div class="testi-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+      <div class="testi-text">"${t.text}"</div>
+      <div class="testi-name">Verified Seller</div>
+      <div class="testi-platform">${t.platform}</div>
+    </div>
+  `).join('');
+}
+function renderHomeTestimonials(){
+  const g=document.getElementById('homeTestimonials');
+  if(!g)return;
+  g.innerHTML=DB.testimonials.slice(0,3).map((t,i)=>`
+    <div class="testi">
+      <div class="testi-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+      <div class="testi-text">"${t.text}"</div>
+      <div class="testi-name">Verified Seller</div>
+      <div class="testi-platform">${t.platform}</div>
+    </div>
+  `).join('');
+}
+
+// ===== POLICIES =====
+const policies={
+  privacy:{title:'Privacy Policy',content:`<h2>Privacy Policy</h2><p><em>Last updated: January 2025</em></p><p>Stepy Solutions ("we", "our", "us") operated by Mohammed Hasnain, Jaipur, Rajasthan, is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.</p><h3>1. Information We Collect</h3><ul><li>Name, phone number, email address</li><li>Business / seller account details</li><li>Order and transaction information</li><li>WhatsApp communications</li><li>Device and browser information</li></ul><h3>2. How We Use Your Information</h3><ul><li>To deliver services and manage your account</li><li>To send WhatsApp notifications about orders and marketplace updates</li><li>To process payments via Razorpay</li><li>To improve our services and respond to queries</li></ul><h3>3. Data Sharing</h3><p>We do NOT sell your personal data to third parties. We may share information with:</p><ul><li>Payment processors (Razorpay) for secure transactions</li><li>Shipping partners for product delivery</li><li>Legal authorities if required by law</li></ul><h3>4. Data Security</h3><p>We implement industry-standard security measures. However, no internet transmission is 100% secure.</p><h3>5. Your Rights</h3><p>You may request access, correction, or deletion of your personal data by contacting us at stepysolutions@gmail.com or +91 7424932963.</p><h3>6. Cookies</h3><p>This website uses minimal cookies for functionality. No advertising cookies are used.</p><h3>7. Contact</h3><p>Mohammed Hasnain, Jagannath Shah Marg, Ramganj Bazar, Jaipur 302003. Email: stepysolutions@gmail.com</p>`},
+  payment:{title:'Payment Policy',content:`<h2>Payment Policy</h2><p><em>Last updated: January 2025</em></p><h3>1. Advance Payment</h3><p>All services require a <strong>50% advance payment</strong> before work begins. The remaining 50% is due upon delivery/completion of work.</p><h3>2. Payment Methods</h3><p>We accept payments via Razorpay (UPI, Net Banking, Credit/Debit Cards). Payment confirmation is sent via WhatsApp and email.</p><h3>3. Government Fees</h3><p>Government fees (for GST, IEC, Trademark, etc.) are charged at actuals — our service fee does not include government fees unless explicitly stated.</p><h3>4. Monthly Plans</h3><p>Monthly plan fees are charged at the beginning of each billing cycle. Plans auto-renew unless cancelled 7 days before renewal date.</p><h3>5. Commission</h3><p>Commission on sales applies ONLY when a seller's monthly income exceeds ₹25,000. Commission rates: Starter 2%, Growth 1.5%, Enterprise 1%.</p><h3>6. Add-ons</h3><p>Add-on charges are additional to plan fees. Global Expansion Add-on: ₹4,000/mo extra. Tax Add-on: ₹1,000/mo + 25% of claim refund + ₹500 fee.</p>`},
+  delivery:{title:'Delivery Policy',content:`<h2>Delivery Policy</h2><p><em>Last updated: January 2025</em></p><h3>Physical Products (Footwear & Tea)</h3><h3>Delivery Timeframes</h3><ul><li><strong>Jaipur City:</strong> 1-day delivery (same/next day)</li><li><strong>Pan India:</strong> 3–4 business days</li><li><strong>Tracking ID:</strong> Sent on WhatsApp within 24 hours of dispatch</li></ul><h3>Shipping Partners</h3><p>We use reputed courier partners. Delivery timelines may vary during festive seasons or due to force majeure events.</p><h3>Delivery Charges</h3><p>Delivery charges are calculated at checkout based on weight and location. Free delivery may apply on bulk orders.</p><h3>Order Confirmation</h3><p>Upon order confirmation, you will receive a congratulations message with order details. Tracking information is sent via WhatsApp within 24 hours.</p><h3>Services (E-commerce Management)</h3><p>Service delivery timelines are communicated at the time of order. Complex services like GST registration may take 7–15 business days depending on government processing.</p>`},
+  data:{title:'Data Policy',content:`<h2>Data Policy</h2><p><em>Last updated: January 2025</em></p><h3>1. Data We Store</h3><p>We store only the minimum data necessary to provide our services: contact details, order history, and communication records.</p><h3>2. Data Retention</h3><p>Active client data is retained for the duration of service engagement plus 3 years for legal compliance. You may request deletion anytime.</p><h3>3. Seller Account Data</h3><p>When managing your seller accounts, we access only what is necessary for service delivery. We never share your marketplace credentials with unauthorized parties.</p><h3>4. WhatsApp Data</h3><p>WhatsApp communications are used for service coordination and updates. We do not store WhatsApp message logs externally.</p><h3>5. Data Deletion</h3><p>Request deletion: stepysolutions@gmail.com. We will process deletion within 30 days, except data required by law.</p>`},
+  security:{title:'Security Policy',content:`<h2>Security Policy</h2><p><em>Last updated: January 2025</em></p><h3>1. Payment Security</h3><p>All payments are processed through Razorpay, a PCI-DSS compliant payment gateway. We do not store card details on our servers.</p><h3>2. Account Credentials</h3><p>Seller account credentials shared with us are handled with strict confidentiality. Access is limited to assigned team members only.</p><h3>3. Communication Security</h3><p>Business communications are conducted via WhatsApp Business and official email. Beware of imposters — always verify via official channels.</p><h3>4. NDA Protection</h3><p>All client data is protected under our Non-Disclosure Agreement (NDA). Sensitive business information is never shared without explicit consent.</p><h3>5. Incident Response</h3><p>In case of any security concern, contact immediately: +91 7424932963 or stepysolutions@gmail.com</p>`},
+  tc:{title:'Terms & Conditions',content:`<h2>Terms & Conditions</h2><p><em>Last updated: January 2025</em></p><h3>1. Service Agreement</h3><p>By purchasing any service or plan from Stepy Solutions, you agree to these Terms & Conditions.</p><h3>2. No Guarantee of Results</h3><p><strong>Important:</strong> We do NOT promise 100% growth, sales targets, or orders. Results depend on your product quality, market demand, pricing, and platform algorithms. Our role is to optimize and manage — outcomes vary.</p><h3>3. Payment Terms</h3><p>50% advance payment is required to initiate any service. Remaining balance is due upon completion.</p><h3>4. Client Responsibilities</h3><p>You must provide accurate information, necessary documents, and timely access to accounts. Delays caused by the client may affect service timelines.</p><h3>5. Scope of Services</h3><p>Services are as described in the service menu. Any additional work outside the agreed scope requires a separate agreement and payment.</p><h3>6. Government Fees</h3><p>Applicable government fees are charged at actuals and are the client's responsibility. Stepy Solutions service fees are separate.</p><h3>7. Cancellation</h3><p>Plans can be cancelled with 7 days' notice before renewal. Prepaid plan fees are non-refundable after the service has commenced, except within the 7-day refund window.</p>`},
+  refund:{title:'Refund Policy',content:`<h2>Refund Policy</h2><p><em>Last updated: January 2025</em></p><h3>Service Refund Policy</h3><p>We operate a <strong>No Refund Policy</strong> with a 7-day conditional refund window:</p><ul><li>If you are unsatisfied with the service, you may request a refund within <strong>7 days</strong> of service delivery</li><li>Refunds are processed after deducting applicable service charges</li><li>Government fees paid are non-refundable</li><li>Work already completed (listings, accounts setup etc.) cannot be reversed</li></ul><h3>Physical Products (Footwear)</h3><ul><li>Returns accepted within 7 days: wrong size or damaged product received</li><li>No exchange option available</li><li>Used products cannot be returned</li></ul><h3>Physical Products (Tea)</h3><ul><li>Returns accepted: expired tea, poor quality/smell</li><li>No exchange option</li><li>Return within 7 days of delivery</li></ul><h3>Plan Subscriptions</h3><p>Monthly plans are non-refundable after the billing cycle begins. Cancel before renewal date to avoid next cycle charges.</p><h3>How to Request Refund</h3><p>WhatsApp: +91 7424932963 or Email: stepysolutions@gmail.com within the stipulated time window.</p>`},
+  nda:{title:'Non-Disclosure Agreement',content:`<h2>Non-Disclosure Agreement (NDA)</h2><p><em>Template — To be executed between Stepy Solutions and Client</em></p><p>This Non-Disclosure Agreement ("Agreement") is entered into between <strong>Stepy Solutions</strong> (Mohammed Hasnain, Jagannath Shah Marg, Ramganj Bazar, Jaipur 302003) and the <strong>Client</strong> engaging our services.</p><h3>1. Confidential Information</h3><p>Both parties agree to keep strictly confidential: seller account credentials, sales data & revenue figures, business strategies & plans, client lists & vendor information, pricing details & margins.</p><h3>2. Obligations</h3><p>Each party agrees to: use confidential information solely for the purpose of service delivery; not disclose to third parties without written consent; maintain confidentiality for 3 years after service termination.</p><h3>3. Exclusions</h3><p>Information is not confidential if: publicly known through no breach of this agreement; independently developed; required by law or court order.</p><h3>4. Remedies</h3><p>Breach of this Agreement may result in legal action for damages. Injunctive relief may be sought without bond.</p><h3>5. Governing Law</h3><p>This Agreement is governed by the laws of India, subject to jurisdiction of courts in Jaipur, Rajasthan.</p><h3>Mutual Agreement</h3><p>By engaging Stepy Solutions services, the client acknowledges reading and agreeing to this NDA. For signed copy, contact: stepysolutions@gmail.com</p>`}
+};
+function showPolicy(key,btn){
+  const p=policies[key];
+  if(!p)return;
+  document.getElementById('policyContent').innerHTML=p.content;
+  document.querySelectorAll('.p-tab').forEach(t=>t.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+}
+
+// ===== ADMIN =====
+function adminLogin(){
+  const u=document.getElementById('adminUser').value;
+  const p=document.getElementById('adminPass').value;
+  if(u==='admin'&&p==='stepy2024'){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminDash').style.display='block';
+    renderAdminTestimonials();renderAdminProducts();renderAdminOrders();renderAdminServices();renderAdminAffiliate();renderAdminPlans();
+  }else{showToast('Invalid credentials');}
+}
+function adminLogout(){document.getElementById('adminLogin').style.display='block';document.getElementById('adminDash').style.display='none';}
+function showAdminPanel(id,li){
+  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.admin-menu li').forEach(l=>l.classList.remove('active'));
+  const el=document.getElementById('ap-'+id);
+  if(el)el.classList.add('active');
+  if(li)li.classList.add('active');
+}
+function renderAdminTestimonials(){
+  const l=document.getElementById('testiAdminList');
+  if(!l)return;
+  l.innerHTML=DB.testimonials.map((t,i)=>`
+    <div class="testi-admin-card">
+      <div style="flex:1">
+        <div style="font-size:12px;font-weight:500">${t.platform} • ${'★'.repeat(t.stars)}</div>
+        <div style="font-size:12px;color:var(--gray);margin-top:.25rem">${t.text.substring(0,80)}...</div>
+      </div>
+      <button class="admin-btn danger" onclick="removeTestimonial(${i})">Delete</button>
+    </div>
+  `).join('');
+}
+function addTestimonial(){
+  const text=document.getElementById('t_text').value.trim();
+  const platform=document.getElementById('t_platform').value.trim();
+  const stars=parseInt(document.getElementById('t_stars').value)||5;
+  const img=document.getElementById('t_img').value.trim();
+  if(!text||!platform){showToast('Please fill required fields');return;}
+  DB.testimonials.push({text,platform,stars,blurred:true,img:img||null});
+  renderAdminTestimonials();renderTestimonials();renderHomeTestimonials();
+  document.getElementById('t_text').value='';document.getElementById('t_platform').value='';document.getElementById('t_img').value='';
+  showToast('Testimonial added ✓');
+}
+function removeTestimonial(i){DB.testimonials.splice(i,1);renderAdminTestimonials();renderTestimonials();renderHomeTestimonials();showToast('Deleted');}
+
+function renderAdminProducts(){
+  const l=document.getElementById('productAdminList');
+  if(!l)return;
+  const type=DB.currentProductTab;
+  l.innerHTML=`<table class="admin-table"><thead><tr><th>Emoji</th><th>Name</th><th>Price</th><th>Category</th><th>Action</th></tr></thead><tbody>${DB.products[type].map((p,i)=>`<tr><td>${p.emoji}</td><td>${p.name}</td><td>₹${p.price}</td><td>${p.cat}</td><td><button class="admin-btn danger" onclick="removeProduct('${type}',${i})">Remove</button></td></tr>`).join('')}</tbody></table>`;
+}
+function switchProductTab(type,btn){
+  DB.currentProductTab=type;
+  document.querySelectorAll('[id^="pt-"]').forEach(b=>{b.style.background='#555';});
+  if(btn)btn.style.background='#000';
+  document.getElementById('p_type').value=type;
+  renderAdminProducts();
+}
+function addProduct(){
+  const name=document.getElementById('p_name').value.trim();
+  const price=parseInt(document.getElementById('p_price').value)||0;
+  const cat=document.getElementById('p_cat').value.trim();
+  const badge=document.getElementById('p_badge').value.trim();
+  const emoji=document.getElementById('p_emoji').value.trim()||'📦';
+  const mrp=parseInt(document.getElementById('p_mrp').value)||0;
+  const type=document.getElementById('p_type').value;
+  if(!name||!price){showToast('Name and price required');return;}
+  DB.products[type].push({id:Date.now(),name,price,mrp,cat,badge,emoji});
+  renderAdminProducts();renderProducts(type);showToast('Product added ✓');
+}
+function removeProduct(type,i){DB.products[type].splice(i,1);renderAdminProducts();renderProducts(type);showToast('Removed');}
+function renderAdminOrders(){
+  const l=document.getElementById('ordersAdminList');
+  if(!l)return;
+  if(DB.orders.length===0){l.innerHTML='<p style="color:var(--gray);font-size:13px">No orders yet.</p>';return;}
+  l.innerHTML=`<table class="admin-table"><thead><tr><th>Name</th><th>Phone</th><th>Items</th><th>Amount</th><th>Date</th></tr></thead><tbody>${DB.orders.map(o=>`<tr><td>${o.name}</td><td>${o.phone}</td><td style="font-size:11px">${o.items}</td><td>₹${o.amount}</td><td>${o.date}</td></tr>`).join('')}</tbody></table>`;
+}
+function renderAdminServices(){
+  const l=document.getElementById('servicesAdminList');
+  if(!l)return;
+  let html='';
+  Object.entries(DB.services).forEach(([cat,svcs])=>{
+    html+=`<div style="margin-bottom:1rem"><div style="font-weight:500;font-size:.85rem;margin-bottom:.5rem;color:var(--rg)">${cat}</div>`;
+    svcs.forEach((s,i)=>{html+=`<div style="display:flex;align-items:center;gap.5rem;padding:4px 0;font-size:12px;border-bottom:1px solid #f5f5f0">
+      <span style="flex:1">#${s.no} ${s.name}</span>
+      <span style="color:var(--gray)">${s.price}</span>
+    </div>`;});
+    html+='</div>';
+  });
+  l.innerHTML=html;
+}
+function renderAdminAffiliate(){
+  const l=document.getElementById('affAdminList');
+  if(!l)return;
+  l.innerHTML=`<table class="admin-table"><thead><tr><th>Product</th><th>Price</th><th>Earn</th><th>Action</th></tr></thead><tbody>${DB.affiliateProducts.map((p,i)=>`<tr><td>${p.emoji} ${p.name}</td><td>₹${p.price}</td><td>${p.earn}</td><td><button class="admin-btn danger" onclick="removeAff(${i})">Remove</button></td></tr>`).join('')}</tbody></table>`;
+}
+function addAffProduct(){
+  const name=document.getElementById('af_name').value.trim();
+  const price=parseInt(document.getElementById('af_price').value)||0;
+  const earn=document.getElementById('af_earn').value.trim();
+  const emoji=document.getElementById('af_emoji').value.trim()||'📦';
+  if(!name||!price){showToast('Name and price required');return;}
+  DB.affiliateProducts.push({name,price,earn,emoji});
+  renderAdminAffiliate();renderAffiliate();showToast('Added ✓');
+}
+function removeAff(i){DB.affiliateProducts.splice(i,1);renderAdminAffiliate();renderAffiliate();showToast('Removed');}
+function renderAdminPlans(){
+  const l=document.getElementById('plansAdminList');
+  if(!l)return;
+  l.innerHTML=DB.plans.map((p,i)=>`
+    <div style="background:#f9f9f4;border-radius:8px;padding:1rem;margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom.5rem">
+        <div style="font-weight:500">${p.name} Plan</div>
+        <div style="color:var(--rg)">₹${p.price}/mo</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray)">Commission: ${p.commission}% • ${p.accounts}</div>
+      <div style="display:flex;gap:.5rem;margin-top:.75rem">
+        <input type="number" value="${p.price}" style="width:100px;padding:6px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:'DM Sans',sans-serif" onchange="DB.plans[${i}].price=parseInt(this.value);renderPlans()">
+        <input type="number" value="${p.commission}" step="0.5" style="width:80px;padding:6px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:'DM Sans',sans-serif" onchange="DB.plans[${i}].commission=parseFloat(this.value);renderPlans()">
+        <span style="font-size:11px;color:var(--gray);align-self:center">Price / Commission %</span>
+      </div>
+    </div>
+  `).join('');
+}
+function saveSettings(){showToast('Settings saved ✓');}
+
+// ===== HELPERS =====
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+function openWA(type){
+  const msgs={
+    general:`Namaste! Main Stepy Solutions se baat karna chahta/chahti hoon.`,
+    support:`Hello Stepy Solutions! Mujhe e-commerce support chahiye.`,
+    health:`Hello! Mujhe apna seller account health check krana hai. (Free service)`,
+    order:`Hello! Maine abhi order kiya hai. Order details confirm karna chahta/chahti hoon.`
+  };
+  window.open(`https://wa.me/917424932963?text=${encodeURIComponent(msgs[type]||msgs.general)}`,'_blank');
+}
+function startPaidCall(){
+  DB.cart=[{type:'service',name:'Paid Consultation Call (30 min)',price:'₹200',id:'paid-call'}];
+  openCheckout(true,false);
+}
+function submitCustomReq(){
+  const txt=document.getElementById('customReqText').value.trim();
+  if(!txt){showToast('Please describe your problem first');return;}
+  window.open(`https://wa.me/917424932963?text=${encodeURIComponent('🛠 Custom Problem Solving Request:\n\n'+txt)}`,'_blank');
+  document.getElementById('customReqText').value='';
+  showToast('Message sent via WhatsApp ✓');
+}
+function sendContactWA(){
+  const name=document.getElementById('cnt_name').value.trim();
+  const phone=document.getElementById('cnt_phone').value.trim();
+  const msg=document.getElementById('cnt_msg').value.trim();
+  if(!name||!phone){showToast('Name and phone required');return;}
+  window.open(`https://wa.me/917424932963?text=${encodeURIComponent(`Contact Form:\nName: ${name}\nPhone: ${phone}\nMessage: ${msg}`)}`,'_blank');
+}
+function submitDropship(){
+  const name=document.getElementById('ds_name').value.trim();
+  const phone=document.getElementById('ds_phone').value.trim();
+  const city=document.getElementById('ds_city').value.trim();
+  const products=document.getElementById('ds_products').value;
+  const promote=document.getElementById('ds_promote').value.trim();
+  if(!name||!phone){showToast('Name and phone required');return;}
+  window.open(`https://wa.me/917424932963?text=${encodeURIComponent(`🤝 DROPSHIPPING APPLICATION\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nProducts: ${products}\nPromotion Plan: ${promote}`)}`,'_blank');
+  showToast('Application submitted ✓');
+}
+
+// Load Razorpay
+const rzScript=document.createElement('script');
+rzScript.src='https://checkout.razorpay.com/v1/checkout.js';
+document.head.appendChild(rzScript);
+
+// ===== INIT =====
+showPage('home');
+renderPlans();
+</script>
+</body>
+</html>
