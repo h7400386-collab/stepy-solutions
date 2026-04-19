@@ -9,34 +9,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#000;--charcoal:#111;--bg:#FAFAF5;--beige:#F5F5DC;--beige2:#E8E8C8;
-  --rg:#C9A96E;--rg2:#E8D5B0;--rg3:#A07840;--white:#fff;
-  --g1:#f8f8f5;--g2:#ececec;--g3:#d4d4d4;--g4:#9CA3AF;--g5:#6B7280;
-  --purple:#7B3FBE;--pink:#E879A0;
-  --ok:#16A34A;--ok-bg:#F0FDF4;--err:#DC2626;--err-bg:#FEF2F2;--warn:#D97706;--warn-bg:#FFFBEB;
-  --border:#E5E5E0;--border2:#C8C8C0;
-  --sh:0 4px 16px rgba(0,0,0,.08);--sh2:0 8px 32px rgba(0,0,0,.12);
+  --black:#001F3F;--charcoal:#001F3F;--bg:#FFFFFF;--beige:#F8F5F2;--beige2:#EDE8E0;
+  --rg:#B76E79;--rg2:#D4969F;--rg3:#8E4D57;--white:#fff;
+  --navy:#001F3F;--sage:#B2AC88;--sage-bg:#F4F3EE;
+  --g1:#F5F5F5;--g2:#EBEBEB;--g3:#CCCCCC;--g4:#888888;--g5:#555555;
+  --purple:#6B3FA0;--pink:#B76E79;
+  --ok:#2D7A4F;--ok-bg:#EEF7F2;--err:#C0392B;--err-bg:#FDEDEC;--warn:#B7860B;--warn-bg:#FEF9EC;
+  --border:#E2DDD8;--border2:#C8C2BA;
+  --sh:0 4px 16px rgba(0,31,63,.07);--sh2:0 8px 32px rgba(0,31,63,.12);
   --r:10px;--rl:16px;--rxl:24px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--charcoal);overflow-x:hidden;line-height:1.6;font-size:15px}
+body{font-family:'DM Sans',sans-serif;background:#FFFFFF;color:#001F3F;overflow-x:hidden;line-height:1.6;font-size:15px}
 a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:'DM Sans',sans-serif}
 h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.2}
 input,select,textarea{font-family:'DM Sans',sans-serif}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05);height:64px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:#FFFFFF;backdrop-filter:blur(12px);border-bottom:2px solid #B76E79;height:64px;box-shadow:0 2px 12px rgba(0,31,63,.08)}
 .nav-in{max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:100%;gap:.75rem}
-.logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--rg);cursor:pointer;white-space:nowrap;letter-spacing:.05em}
-.logo span{color:#fff;font-weight:300}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:#B76E79;cursor:pointer;white-space:nowrap;letter-spacing:.05em}
+.logo span{color:#001F3F;font-weight:300}
 .nav-links{display:flex;align-items:center;gap:.15rem}
-.nl{color:#999;font-size:12px;padding:5px 8px;border-radius:4px;background:none;border:none;letter-spacing:.02em;white-space:nowrap;transition:color .15s}
-.nl:hover,.nl.on{color:var(--rg)}
-.nl.cta{background:var(--rg);color:#000!important;font-weight:600;padding:6px 14px;border-radius:5px;margin-left:.25rem}
-.nl.cta:hover{background:var(--rg2)}
+.nl{color:#001F3F;font-size:12px;padding:5px 8px;border-radius:4px;background:none;border:none;letter-spacing:.02em;white-space:nowrap;transition:color .15s}
+.nl:hover,.nl.on{color:#B76E79}
+.nl.cta{background:#001F3F;color:#fff!important;font-weight:600;padding:6px 14px;border-radius:5px;margin-left:.25rem}
+.nl.cta:hover{background:#B76E79}
 .ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
-.ham span{display:block;width:20px;height:1.5px;background:var(--rg)}
-.mob-nav{display:none;position:fixed;top:64px;left:0;right:0;z-index:999;background:#000;border-bottom:1px solid #222;padding:.75rem 1.25rem;flex-direction:column;gap:.2rem;max-height:80vh;overflow-y:auto}
+.ham span{display:block;width:20px;height:1.5px;background:#001F3F}
+.mob-nav{display:none;position:fixed;top:64px;left:0;right:0;z-index:999;background:#FFFFFF;border-bottom:2px solid #B76E79;padding:.75rem 1.25rem;flex-direction:column;gap:.2rem;max-height:80vh;overflow-y:auto}
 .mob-nav.open{display:flex}
 .mob-nav .nl{font-size:13.5px;padding:9px 10px;border-radius:5px}
 
@@ -45,13 +46,13 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 .pg.on{display:block}
 
 /* TICKER */
-.tick{background:#000;overflow:hidden;padding:8px 0;border-bottom:1px solid #111;position:relative}
+.tick{background:#001F3F;overflow:hidden;padding:8px 0;border-bottom:1px solid #111;position:relative}
 .tick::before,.tick::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
-.tick::before{left:0;background:linear-gradient(to right,#000,transparent)}
-.tick::after{right:0;background:linear-gradient(to left,#000,transparent)}
+.tick::before{left:0;background:linear-gradient(to right,#001F3F,transparent)}
+.tick::after{right:0;background:linear-gradient(to left,#001F3F,transparent)}
 .tick-t{display:flex;gap:2rem;animation:tick-anim 28s linear infinite;width:max-content;align-items:center}
 .ti{display:flex;align-items:center;gap:.4rem;font-size:11px;color:#666;white-space:nowrap;letter-spacing:.05em}
-.tid{width:4px;height:4px;border-radius:50%;background:var(--rg);flex-shrink:0}
+.tid{width:4px;height:4px;border-radius:50%;background:#B76E79;flex-shrink:0}
 .ti img{height:14px;filter:grayscale(1) brightness(0.5);object-fit:contain}
 @keyframes tick-anim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -59,17 +60,17 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 .sec{padding:5.5rem 1.5rem}
 .sec-sm{padding:3.5rem 1.5rem}
 .si{max-width:1280px;margin:0 auto}
-.sec-dark{background:#000}
-.sec-w{background:#fff}
-.sec-bg{background:var(--bg)}
-.ey{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--rg);margin-bottom:.6rem;font-weight:600}
+.sec-dark{background:#001F3F}
+.sec-w{background:#FFFFFF}
+.sec-bg{background:#F8F5F2}
+.ey{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#B76E79;margin-bottom:.6rem;font-weight:600}
 .st{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.9rem,4vw,3rem);line-height:1.15;margin-bottom:.75rem}
 .ss{color:var(--g5);font-size:.9rem;line-height:1.8;max-width:600px}
-.gl{display:block;width:44px;height:1px;background:var(--rg);margin:1.1rem 0}
+.gl{display:block;width:44px;height:2px;background:#B76E79;margin:1.1rem 0;border-radius:2px}
 
 /* HERO */
-.hero{background:#000;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero-aura{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 20% 60%,rgba(123,63,190,.13),transparent 70%),radial-gradient(ellipse 45% 40% at 80% 40%,rgba(232,121,160,.08),transparent 70%),radial-gradient(ellipse 40% 55% at 50% 85%,rgba(201,169,110,.07),transparent 60%)}
+.hero{background:#001F3F;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-aura{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 20% 60%,rgba(183,110,121,.18),transparent 70%),radial-gradient(ellipse 45% 40% at 80% 40%,rgba(178,172,136,.10),transparent 70%),radial-gradient(ellipse 40% 55% at 50% 85%,rgba(0,31,63,.04),transparent 60%)}
 .hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:55px 55px}
 .hero-in{position:relative;z-index:2;text-align:center;padding:3.5rem 1.5rem;max-width:940px;margin:0 auto}
 .h-eye{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(201,169,110,.4);color:var(--rg);font-size:10.5px;padding:6px 16px;border-radius:30px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2.25rem}
@@ -80,15 +81,15 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 .hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
 .h-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:3.5rem;padding-top:2.75rem;border-top:1px solid #1e1e1e}
 .hs{text-align:center}
-.hs-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--rg);line-height:1}
+.hs-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#B76E79;line-height:1}
 .hs-l{font-size:10px;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
 
 /* BTNS */
 .btn{display:inline-flex;align-items:center;gap:.4rem;padding:12px 26px;border-radius:5px;font-size:13.5px;font-weight:500;letter-spacing:.03em;transition:all .18s;border:none;white-space:nowrap}
-.btn-rg{background:var(--rg);color:#000}.btn-rg:hover{background:var(--rg2);transform:translateY(-1px)}
-.btn-blk{background:#000;color:#fff}.btn-blk:hover{background:#222;transform:translateY(-1px)}
-.btn-out{background:transparent;color:#fff;border:1px solid #444}.btn-out:hover{border-color:var(--rg);color:var(--rg)}
-.btn-out2{background:transparent;color:#000;border:1px solid var(--border2)}.btn-out2:hover{border-color:var(--rg);color:var(--rg)}
+.btn-rg{background:#B76E79;color:#fff}.btn-rg:hover{background:#D4969F;transform:translateY(-1px)}
+.btn-blk{background:#001F3F;color:#fff}.btn-blk:hover{background:#003366;transform:translateY(-1px)}
+.btn-out{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}.btn-out:hover{border-color:var(--rg);color:var(--rg)}
+.btn-out2{background:transparent;color:#001F3F;border:1.5px solid #001F3F}.btn-out2:hover{border-color:#B76E79;color:#B76E79}
 .btn-grn{background:#25D366;color:#fff}.btn-grn:hover{background:#1da851}
 .btn-red{background:var(--err);color:#fff}
 .btn-sm{padding:7px 16px;font-size:12px}
@@ -98,21 +99,21 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 /* BANNER - HERO PROFESSIONAL */
 .pro-banner{border-radius:var(--rxl);overflow:hidden;position:relative;margin:1.5rem 0;min-height:220px;display:flex;align-items:center;justify-content:center;padding:3rem 2rem;text-align:center}
 .banner-ecom{background:linear-gradient(135deg,#000 0%,#0d0020 50%,#000 100%)}
-.banner-fw{background:linear-gradient(135deg,#0a0a0a 0%,#1a1000 50%,#0a0a0a 100%)}
-.banner-tea{background:linear-gradient(135deg,#0a0500 0%,#1a0800 50%,#0a0500 100%)}
-.banner-aff{background:linear-gradient(135deg,#000 0%,#0d0020 50%,#000 100%)}
+.banner-fw{background:linear-gradient(135deg,#3A1A20 0%,#6B2D39 50%,#3A1A20 100%)}
+.banner-tea{background:linear-gradient(135deg,#1A2E1A 0%,#2D4A2D 50%,#1A2E1A 100%)}
+.banner-aff{background:linear-gradient(135deg,#001F3F 0%,#003366 50%,#001F3F 100%)}
 .banner-glow{position:absolute;inset:0;pointer-events:none}
 
 /* CARDS */
-.card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;transition:all .18s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.card:hover{border-color:var(--rg);box-shadow:var(--sh);transform:translateY(-2px)}
+.card{background:#FFFFFF;border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;transition:all .18s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card:hover{border-color:#B76E79;box-shadow:var(--sh);transform:translateY(-2px)}
 
 /* PLANS */
 .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.plan{background:#fff;border:1.5px solid var(--border);border-radius:var(--rxl);padding:1.75rem 1.5rem;position:relative;display:flex;flex-direction:column;transition:all .18s}
+.plan{background:#FFFFFF;border:1.5px solid var(--border);border-radius:var(--rxl);padding:1.75rem 1.5rem;position:relative;display:flex;flex-direction:column;transition:all .18s}
 .plan:hover{border-color:var(--rg);box-shadow:var(--sh2);transform:translateY(-3px)}
 .plan.feat{border-color:var(--rg);border-width:2px}
-.plan.feat::before{content:'⭐ Most Popular';position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--rg);color:#000;font-size:10px;padding:3px 14px;border-radius:20px;font-weight:700;white-space:nowrap;letter-spacing:.05em}
+.plan.feat::before{content:'⭐ Most Popular';position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#B76E79;color:#fff;font-size:10px;padding:3px 14px;border-radius:20px;font-weight:700;white-space:nowrap;letter-spacing:.05em}
 .plan-lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rg);margin-bottom:.4rem;font-weight:700}
 .plan-nm{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.2rem}
 .plan-ds{font-size:11.5px;color:var(--g4);margin-bottom:1.1rem}
@@ -143,8 +144,8 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 /* SERVICES */
 .cat-nav{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
 .cbt{padding:6px 14px;border-radius:20px;font-size:12px;border:1px solid var(--border);background:none;color:var(--g5);transition:all .15s}
-.cbt:hover{border-color:var(--rg);color:var(--rg)}
-.cbt.on{background:#000;color:#fff;border-color:#000}
+.cbt:hover{border-color:#B76E79;color:#B76E79}
+.cbt.on{background:#001F3F;color:#fff;border-color:#001F3F}
 .svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.65rem}
 .svc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:.85rem;transition:all .15s;position:relative}
 .svc:hover{border-color:var(--rg)}
@@ -153,7 +154,7 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 .svc-t{font-size:12.5px;font-weight:500;margin-bottom:.15rem;line-height:1.3;padding-right:30px}
 .svc-d{font-size:10.5px;color:var(--g4);margin-bottom:.35rem;line-height:1.4}
 .svc-p{font-size:11px;color:var(--g5)}
-.fb{display:inline-block;font-size:9px;padding:1px 6px;border-radius:3px;background:var(--ok-bg);color:var(--ok);font-weight:700;margin-left:.25rem;border:1px solid rgba(22,163,74,.2)}
+.fb{display:inline-block;font-size:9px;padding:1px 6px;border-radius:3px;background:#EEF7F2;color:#2D7A4F;font-weight:700;margin-left:.25rem;border:1px solid rgba(45,122,79,.2)}
 .sadd{position:absolute;top:.7rem;right:.7rem;width:24px;height:24px;border-radius:50%;background:#000;color:#fff;border:none;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
 .svc.inc .sadd{background:var(--rg);color:#000}
 
@@ -222,8 +223,8 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 /* POLICY */
 .pol-nav{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:.9rem}
 .ptab{padding:6px 13px;border-radius:20px;font-size:11.5px;border:1px solid var(--border);background:none;color:var(--g5);transition:all .15s}
-.ptab:hover{border-color:var(--rg);color:var(--rg)}
-.ptab.on{background:#000;color:#fff;border-color:#000}
+.ptab:hover{border-color:#B76E79;color:#B76E79}
+.ptab.on{background:#001F3F;color:#fff;border-color:#001F3F}
 #polContent h2{font-size:1.75rem;margin:1.5rem 0 .7rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;font-family:'Cormorant Garamond',serif;font-weight:400}
 #polContent h3{font-size:.95rem;font-weight:600;color:var(--rg);margin:1.4rem 0 .35rem}
 #polContent p{font-size:12.5px;color:var(--g5);line-height:1.9;margin-bottom:.8rem}
@@ -251,11 +252,11 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 
 /* ADMIN */
 .admin-layout{display:grid;grid-template-columns:200px 1fr;gap:1.5rem;min-height:65vh}
-.admin-sb{background:#000;border-radius:var(--rl);padding:1.2rem;position:sticky;top:80px;align-self:start}
-.admin-sb-t{color:var(--rg);font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:1.1rem}
+.admin-sb{background:#001F3F;border-radius:var(--rl);padding:1.2rem;position:sticky;top:80px;align-self:start}
+.admin-sb-t{color:#B76E79;font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:1.1rem}
 .amenu{list-style:none}
 .ami{padding:7px 10px;color:#999;font-size:12px;cursor:pointer;border-radius:5px;margin-bottom:2px;transition:all .15s}
-.ami:hover,.ami.on{background:#1a1a1a;color:var(--rg)}
+.ami:hover,.ami.on{background:rgba(255,255,255,.08);color:#B76E79}
 .admin-main{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem}
 .ap{display:none}
 .ap.on{display:block}
@@ -328,17 +329,17 @@ input,select,textarea{font-family:'DM Sans',sans-serif}
 .lbl-sz:hover,.lbl-sz.on{border-color:var(--rg);background:#fffcf5;color:var(--rg)}
 
 /* FOOTER */
-footer{background:#000;color:#888;padding:4rem 1.5rem 2rem;border-top:1px solid #0f0f0f}
+footer{background:#001F3F;color:#9AB;padding:4rem 1.5rem 2rem;border-top:1px solid #0f0f0f}
 .ft-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.25rem}
-.ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rg);margin-bottom:.8rem}
+.ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#B76E79;margin-bottom:.8rem}
 .ft-logo span{color:#fff;font-weight:300}
 .ft-desc{font-size:11px;line-height:1.9;color:#555;margin-bottom:1.1rem}
 .ft-st{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#444;margin-bottom:.9rem}
 .ft-links{list-style:none}
 .ft-links li{margin-bottom:.5rem}
 .ft-links a{color:#555;font-size:11px;transition:color .15s}
-.ft-links a:hover{color:var(--rg)}
-.ft-bot{border-top:1px solid #111;padding-top:1.5rem;margin-top:3rem;display:flex;justify-content:space-between;font-size:10.5px;flex-wrap:wrap;gap:.5rem}
+.ft-links a:hover{color:#B76E79}
+.ft-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;margin-top:3rem;display:flex;justify-content:space-between;font-size:10.5px;flex-wrap:wrap;gap:.5rem}
 
 /* RESPONSIVE */
 @media(max-width:1100px){.plans-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}.ft-in{grid-template-columns:1fr 1fr}}
@@ -1082,7 +1083,7 @@ footer{background:#000;color:#888;padding:4rem 1.5rem 2rem;border-top:1px solid 
 <div class="pg" id="pg-admin">
   <div class="sec sec-bg">
     <div class="si">
-      <div id="adminLoginWrap" style="max-width:380px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:var(--rxl);padding:2.25rem;text-align:center">
+      <div id="adminLoginWrap" style="max-width:380px;margin:0 auto;background:#FFFFFF;border:2px solid #B76E79;border-radius:var(--rxl);padding:2.25rem;text-align:center">
         <div style="font-size:3rem;margin-bottom:.75rem">🔐</div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;margin-bottom:1.3rem">Admin Panel</h2>
         <div class="fg"><label class="fl">Username</label><input type="text" id="adUser" class="fi" placeholder="admin" value="admin"></div>
@@ -1863,7 +1864,7 @@ function payViaWhatsApp() {
   const msg = encodeURIComponent(
     `💰 *Payment Request — Stepy Solutions*\n\n` +
     `Hi ${name}!\n\nPlease pay ₹${amt.toLocaleString('en-IN')} via UPI or bank transfer:\n\n` +
-    `📱 *UPI ID:* stepysolutions@paytm\n` +
+    `📱 *UPI ID:* mohdhasnain7424@ibl\n` +
     `🏦 *Or pay via:* Google Pay / PhonePe / Paytm to 7424932963\n\n` +
     `🆔 Order Ref: ${oid}\n` +
     `📸 After payment, please send the screenshot here and we will confirm your order immediately.\n\n` +
@@ -1965,20 +1966,54 @@ function launchRazorpay(payNow, desc, name, email, phone, addr, isCOD) {
 }
 
 function showPaymentOptions(payNow, desc, name, phone, addr) {
-  // Show inline payment options instead of crashing
   const el = document.getElementById('payMethodInfo');
-  el.style.background = '#fff8f0';
-  el.style.border = '1px solid rgba(217,119,6,.3)';
+  el.style.background = '#F8F5F2';
+  el.style.border = '1.5px solid #B76E79';
+  el.style.borderRadius = '12px';
+  el.style.padding = '1rem';
+  const upiLink = `upi://pay?pa=mohdhasnain7424@ibl&pn=Mohammed+Hasnain&am=${payNow}&cu=INR&tn=StepySolutions+Order`;
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}&color=001F3F&bgcolor=FFFFFF`;
   el.innerHTML = `
-    <div style="font-weight:600;color:var(--warn);margin-bottom:.5rem">Online payment: choose a method below</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
-      <a href="upi://pay?pa=stepysolutions@paytm&pn=StepySolutions&am=${payNow}&cu=INR&tn=Order" style="display:block;background:#5F259F;color:#fff;border-radius:6px;padding:9px 12px;text-align:center;font-size:12.5px;font-weight:600;text-decoration:none">📱 Pay via UPI App</a>
-      <button onclick="payViaWhatsApp()" style="background:#25D366;color:#fff;border:none;border-radius:6px;padding:9px 12px;font-size:12.5px;font-weight:600;cursor:pointer">💬 Pay via WhatsApp</button>
+    <div style="font-weight:700;color:#001F3F;font-size:14px;margin-bottom:.75rem;text-align:center">Choose Payment Method</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.75rem">
+      <a href="${upiLink}" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;background:#5F259F;color:#fff;border-radius:8px;padding:11px 8px;text-align:center;font-size:12px;font-weight:600;text-decoration:none">
+        <span style="font-size:18px">📱</span>Any UPI App
+        <span style="font-size:10px;opacity:.85">PhonePe · GPay · Paytm</span>
+      </a>
+      <button onclick="toggleQR()" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;background:#001F3F;color:#fff;border:none;border-radius:8px;padding:11px 8px;font-size:12px;font-weight:600;cursor:pointer">
+        <span style="font-size:18px">▣</span>Scan QR Code
+        <span style="font-size:10px;opacity:.75">Show PhonePe QR</span>
+      </button>
     </div>
-    <div style="font-size:11px;color:var(--g4)">UPI ID: <strong>stepysolutions@paytm</strong> · Amount: <strong>₹${payNow.toLocaleString('en-IN')}</strong></div>
-    <div style="font-size:11px;color:var(--g4);margin-top:.25rem">After payment, send screenshot on WhatsApp — order confirmed immediately.</div>
+    <div id="qrSection" style="display:none;text-align:center;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #E2DDD8;margin-bottom:.65rem">
+      <img src="${qrSrc}" alt="UPI QR Code" style="width:160px;height:160px;border-radius:6px;margin-bottom:.5rem" onerror="this.style.display='none';document.getElementById('qrFallback').style.display='block'">
+      <div id="qrFallback" style="display:none;width:160px;height:160px;margin:0 auto;background:#f5f5f5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888">QR Code</div>
+      <div style="font-size:11px;color:#001F3F;font-weight:600">Scan with PhonePe / any UPI app</div>
+      <div style="font-size:10.5px;color:#888;margin-top:.2rem">Mohammed Hasnain</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E2DDD8;border-radius:8px;padding:.75rem;margin-bottom:.65rem">
+      <div style="font-size:11px;color:#888;margin-bottom:.25rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase">UPI ID</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+        <div style="font-size:14px;font-weight:700;color:#001F3F;font-family:monospace">mohdhasnain7424@ibl</div>
+        <button onclick="copyUPI()" style="background:#B76E79;color:#fff;border:none;border-radius:5px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer">Copy</button>
+      </div>
+      <div style="font-size:11.5px;color:#B76E79;font-weight:600;margin-top:.35rem">Amount: ₹${payNow.toLocaleString('en-IN')}</div>
+    </div>
+    <button onclick="payViaWhatsApp()" style="width:100%;background:#25D366;color:#fff;border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:16px;height:16px"> Send Payment Screenshot on WhatsApp
+    </button>
+    <div style="font-size:10.5px;color:#888;text-align:center;margin-top:.5rem">After paying, send screenshot → order confirmed instantly</div>
   `;
   el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function toggleQR(){
+  const q=document.getElementById('qrSection');
+  if(q) q.style.display=q.style.display==='none'?'block':'none';
+}
+function copyUPI(){
+  navigator.clipboard.writeText('mohdhasnain7424@ibl').then(()=>showToast('UPI ID copied ✓')).catch(()=>{
+    const t=document.createElement('textarea');t.value='mohdhasnain7424@ibl';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('UPI ID copied ✓');
+  });
 }
 
 function processPayment() { doCheckoutAction(); }
@@ -2408,29 +2443,52 @@ document.addEventListener('DOMContentLoaded',()=>{
 // ============================================================
 function exportToExcel({ name, phone, email, addr, desc, amountPaid, payId, oid, date }) {
   try {
-    const rows = [
-      ['Order ID', 'Date', 'Customer Name', 'Phone', 'Email', 'Address', 'Items/Services', 'Amount Paid', 'Payment ID'],
-      [oid, date, name, phone, email, addr || 'N/A', desc, '₹' + amountPaid.toLocaleString('en-IN'), payId]
-    ];
-    // Append to existing data in localStorage
+    // Save to localStorage
     const existing = JSON.parse(localStorage.getItem('ss_excel_data') || '[]');
     existing.push({ oid, date, name, phone, email, addr: addr || '', desc, amount: amountPaid, payId });
     localStorage.setItem('ss_excel_data', JSON.stringify(existing));
 
-    // Auto-download CSV for admin records
-    const csvContent = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    // ── Send to Google Sheets via Apps Script Web App ──
+    // SETUP: Deploy this Google Apps Script as web app and paste the URL below
+    // function doPost(e){
+    //   const data = JSON.parse(e.postData.contents);
+    //   const sheet = SpreadsheetApp.openById('YOUR_SHEET_ID').getActiveSheet();
+    //   sheet.appendRow([data.oid,data.date,data.name,data.phone,data.email,data.addr,data.desc,'₹'+data.amount,data.payId]);
+    //   return ContentService.createTextOutput('OK');
+    // }
+    const SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // Replace after deployment
+    if (SHEETS_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ oid, date, name, phone, email, addr: addr || '', desc, amount: amountPaid, payId })
+      }).catch(() => {});
+    }
+
+    // Also email via mailto to stepyfootwear@gmail.com (opens email client)
+    // Auto-download CSV
+    const rows = [
+      ['Order ID','Date','Name','Phone','Email','Address','Items','Amount','Payment ID'],
+      [oid,date,name,phone,email,addr||'',desc,'₹'+amountPaid,payId]
+    ];
+    const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `StepySolutions_Order_${oid}_${date.replace(/\//g, '-')}.csv`;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.href=url; a.download=`StepySolutions_${oid}.csv`; a.style.display='none';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  } catch (e) {
-    console.log('Excel export note:', e.message);
+
+    // Send email notification via mailto
+    const subject = encodeURIComponent('New Order: ' + oid + ' — Stepy Solutions');
+    const body = encodeURIComponent('Order ID: '+oid+'\nDate: '+date+'\nName: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nAddress: '+(addr||'N/A')+'\nItems: '+desc+'\nAmount: ₹'+amountPaid+'\nPayment ID: '+payId);
+    // Silently try email (works on desktop)
+    const mailLink = `mailto:stepyfootwear@gmail.com?subject=${subject}&body=${body}`;
+    const mailA = document.createElement('a'); mailA.href=mailLink; mailA.style.display='none';
+    document.body.appendChild(mailA); mailA.click(); document.body.removeChild(mailA);
+  } catch(e) {
+    console.log('Export note:', e.message);
   }
 }
 
