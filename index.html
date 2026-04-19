@@ -404,58 +404,107 @@ footer{background:#000;color:#888;padding:4rem 1.5rem 2rem;border-top:1px solid 
 
 <!-- ===== MODALS ===== -->
 
-<!-- CHECKOUT MODAL -->
+<!-- CHECKOUT MODAL — v4 with COD + Free Shipping + WhatsApp Pay -->
 <div class="modal" id="mCheckout">
-  <div class="mbox">
+  <div class="mbox" style="max-width:540px">
     <button class="mclose" onclick="CM('mCheckout')">×</button>
-    <div class="mtitle">Complete Order</div>
-    <div class="msub">50% advance required to begin work</div>
+    <div class="mtitle" id="coTitle">Complete Order</div>
+    <div class="msub" id="coSubtitle">Review before confirming</div>
+
+    <!-- ORDER SUMMARY -->
     <div class="osm">
       <div id="oItems"></div>
-      <div id="oAdv"></div>
-      <div id="oTotal"></div>
+      <div id="oAddons" style="margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--border)"></div>
+      <div id="oShipping" style="margin-top:.35rem"></div>
+      <div id="oCOD" style="margin-top:.35rem"></div>
+      <div id="oTotal" style="margin-top:.5rem;padding-top:.6rem;border-top:2px solid var(--border)"></div>
     </div>
-    <div class="fg">
-      <label class="fl">Full Name *</label>
-      <input type="text" id="co_name" class="fi req" placeholder="Aapka poora naam">
-    </div>
-    <div class="fr">
+
+    <!-- USER FIELDS -->
+    <div id="userFieldsWrap">
       <div class="fg">
-        <label class="fl">WhatsApp / Mobile *</label>
-        <input type="tel" id="co_phone" class="fi req" placeholder="10-digit number" maxlength="10">
+        <label class="fl">Full Name *</label>
+        <input type="text" id="co_name" class="fi req" placeholder="Aapka poora naam">
       </div>
-      <div class="fg">
-        <label class="fl">Email *</label>
-        <input type="email" id="co_email" class="fi req" placeholder="your@email.com">
+      <div class="fr">
+        <div class="fg">
+          <label class="fl">WhatsApp / Mobile *</label>
+          <input type="tel" id="co_phone" class="fi req" placeholder="10-digit number" maxlength="10">
+        </div>
+        <div class="fg">
+          <label class="fl">Email *</label>
+          <input type="email" id="co_email" class="fi req" placeholder="your@email.com">
+        </div>
       </div>
     </div>
-    <div id="addrWrap">
+
+    <!-- Logged-in notice -->
+    <div id="userLoggedNotice" style="display:none;background:var(--ok-bg);border:1px solid rgba(22,163,74,.2);border-radius:var(--r);padding:.75rem 1rem;margin-bottom:1rem;font-size:12.5px;color:var(--ok)">
+      ✅ Ordering as: <strong id="coUserName"></strong> · <span style="color:var(--g5)" id="coUserEmail"></span>
+      <span style="float:right;cursor:pointer;color:var(--rg);font-size:11px" onclick="useAnotherAccount()">Change</span>
+    </div>
+
+    <!-- DELIVERY ADDRESS — products only -->
+    <div id="addrWrap" style="display:none">
       <div class="fg">
         <label class="fl">Delivery Address *</label>
-        <textarea id="co_addr" class="fta" placeholder="Full address with pincode"></textarea>
+        <textarea id="co_addr" class="fta" placeholder="Full address with pincode (Free Shipping across India)"></textarea>
       </div>
     </div>
-    <div id="loginWrap" style="display:none">
-      <p style="font-size:10.5px;color:var(--g4);margin-bottom:.65rem">Optional: Save for order tracking</p>
-      <div class="fr">
-        <div class="fg"><label class="fl">User ID (Optional)</label><input type="text" id="co_uid" class="fi" placeholder="Username"></div>
-        <div class="fg"><label class="fl">Password (Optional)</label><input type="password" id="co_pass" class="fi" placeholder="Password"></div>
-      </div>
+
+    <!-- COD OPTION — shown only for products under ₹150 -->
+    <div id="codWrap" style="display:none;background:var(--ok-bg);border:1px solid rgba(22,163,74,.28);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.9rem">
+      <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer">
+        <input type="checkbox" id="co_cod" style="margin-top:3px;accent-color:var(--ok);width:16px;height:16px;flex-shrink:0" onchange="onCODChange()">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ok)">Cash on Delivery (COD) — Optional</div>
+          <div style="font-size:11.5px;color:var(--g5);margin-top:.2rem">Order value is under ₹150 — you can pay cash when your order arrives. No online payment needed.</div>
+          <div style="font-size:11px;color:var(--g4);margin-top:.2rem">✓ Free Shipping · ✓ Pay on delivery</div>
+        </div>
+      </label>
     </div>
+
+    <!-- 50% ADVANCE — services/plans optional -->
+    <div id="advanceWrap" style="display:none;background:var(--warn-bg);border:1px solid rgba(217,119,6,.25);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.9rem">
+      <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer">
+        <input type="checkbox" id="co_advance" style="margin-top:3px;accent-color:var(--rg);width:16px;height:16px;flex-shrink:0" onchange="recalcCheckout()">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--warn)">Pay 50% Advance Now (Optional)</div>
+          <div style="font-size:11.5px;color:var(--g5);margin-top:.2rem">Work starts after advance. Or pay full now. You can also book & pay later after discussion.</div>
+          <div id="advanceAmountShow" style="font-size:12px;color:var(--rg);font-weight:700;margin-top:.35rem"></div>
+        </div>
+      </label>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div id="oAddonsWrap" style="display:none;margin-bottom:.9rem">
+      <div id="oAddons2"></div>
+    </div>
+
+    <!-- T&C -->
     <div class="tc-wrap">
       <input type="checkbox" id="co_tc">
-      <span>I accept <span class="tcl" onclick="G('policy');CM('mCheckout')">Terms & Conditions</span>, Privacy Policy & No-Refund Policy. 50% advance is non-refundable once work starts. Commission applies only on income >₹25,000/mo. No 100% growth guarantee.</span>
+      <span>I accept the <span class="tcl" onclick="G('policy');CM('mCheckout')">Terms & Conditions</span> and Refund Policy. No 100% growth/order guarantee.</span>
     </div>
-    <button class="btn btn-blk btn-full" id="payBtn" onclick="processPayment()" style="padding:14px;font-size:14px">
-      🔒 Pay Securely via Razorpay
+
+    <!-- MAIN ACTION BUTTON -->
+    <button class="btn btn-blk btn-full" id="coActionBtn" onclick="doCheckoutAction()" style="padding:15px;font-size:15px;font-weight:600;letter-spacing:.03em;border-radius:8px">
+      Confirm Order
     </button>
-    <div style="text-align:center;margin-top:.65rem;font-size:11px;color:var(--g4);display:flex;align-items:center;justify-content:center;gap:.5rem">
-      <span>Secured by</span>
-      <img src="https://razorpay.com/newsroom-content/uploads/2024/03/Razorpay-Logo.png" alt="Razorpay" style="height:16px;object-fit:contain">
+
+    <!-- PAYMENT METHOD INFO -->
+    <div id="payMethodInfo" style="margin-top:.75rem;padding:.75rem 1rem;background:var(--g1);border-radius:var(--r);font-size:12px;color:var(--g5);line-height:1.7"></div>
+
+    <div id="waPayOption" style="display:none;margin-top:.75rem">
+      <div style="text-align:center;font-size:11.5px;color:var(--g4);margin-bottom:.65rem">— or pay via —</div>
+      <button class="btn btn-grn btn-full btn-sm" onclick="payViaWhatsApp()" style="font-size:13px">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:16px;height:16px"> Pay via WhatsApp / UPI Link
+      </button>
     </div>
   </div>
 </div>
 
+<!-- SUCCESS MODAL -->
 <!-- SUCCESS MODAL -->
 <div class="modal" id="mSuccess">
   <div class="mbox" style="text-align:center">
@@ -915,7 +964,7 @@ footer{background:#000;color:#888;padding:4rem 1.5rem 2rem;border-top:1px solid 
           <p style="font-size:.85rem;color:var(--g4);line-height:1.8;margin-bottom:1rem">📍 Jagannath Shah Marg, Ramganj Bazar, Jaipur 302003<br>📞 +91 7424932963 · 📧 stepysolutions@gmail.com</p>
           <div class="exp-tags">
             <span class="exp-tag">Amazon Expert</span><span class="exp-tag">Flipkart Pro</span>
-            <span class="exp-tag">GST Specialist</span><span class="exp-tag">Trademark Filing</span>
+            <span class="exp-tag">GST Available as Add-on</span><span class="exp-tag">Trademark Filing</span>
             <span class="exp-tag">IEC & Export</span><span class="exp-tag">PPC & Ads</span>
             <span class="exp-tag">AI Creatives</span><span class="exp-tag">Etsy & eBay</span>
           </div>
@@ -1127,6 +1176,7 @@ footer{background:#000;color:#888;padding:4rem 1.5rem 2rem;border-top:1px solid 
             <!-- ORDERS -->
             <div class="ap" id="ap_orders">
               <div class="ap-t">Orders & Tracking</div>
+              <div style="margin-bottom:1rem;display:flex;gap:.65rem;align-items:center"><button class="btn btn-rg btn-sm" onclick="downloadAllExcel()">⬇ Download All as Excel/CSV</button><span style="font-size:11px;color:var(--g4)">All registrations & purchases</span></div>
               <div id="adminOrdersList"></div>
             </div>
             <!-- PLANS -->
@@ -1228,13 +1278,13 @@ const DB = {
   },
   plans: [
     { id:'starter', name:'Starter', lbl:'For New Sellers', price:999, comm:2, desc:'Perfect for first-time sellers', acc:'1 Account', popular:false,
-      feats:['Full account setup & onboarding','Up to 100 product listings','Basic SEO & keyword optimization','Monthly account health report','GST filing support (basic)','WhatsApp support 9AM–3PM','Free account health check','WhatsApp marketplace alerts (earliest)','All general services FREE (excl. financial/legal)','Govt fees at actuals — not included'],
+      feats:['Full account setup & onboarding','Up to 100 product listings','Basic SEO & keyword optimization','Monthly account health report','WhatsApp support 9AM–3PM','Free account health check','WhatsApp marketplace alerts (earliest)','All general services FREE (excl. financial/legal)','Govt fees at actuals — not included'],
       nope:['PPC Ad Campaigns','P&L Reports','AI Creatives','2+ Accounts'] },
     { id:'growth', name:'Growth', lbl:'For Scaling Sellers', price:2499, comm:1.5, desc:'For sellers scaling across platforms', acc:'2–3 Accounts', popular:true,
-      feats:['2–3 Seller Accounts managed','Full setup + 250 SKU listings','PPC Campaign management','Monthly P&L Report','A+ Content — Top 10 Products','GST Filing + TCS Reconciliation','Return rate monitoring','Competitor analysis (monthly)','Priority WhatsApp support','Festive season strategy','All general services FREE (excl. financial/legal)','Govt fees at actuals'],
+      feats:['2–3 Seller Accounts managed','Full setup + 250 SKU listings','PPC Campaign management','Monthly P&L Report','A+ Content — Top 10 Products','Return rate monitoring','Competitor analysis (monthly)','Priority WhatsApp support','Festive season strategy','All general services FREE (excl. financial/legal)','Govt fees at actuals'],
       nope:['AI Creatives (add-on)','5+ Accounts'] },
     { id:'enterprise', name:'Enterprise', lbl:'For Power Sellers', price:4999, comm:1, desc:'Complete management for multi-channel sellers', acc:'5+ Accounts', popular:false,
-      feats:['5+ Seller Accounts managed','Unlimited listings & cataloguing','Full PPC + advanced ad strategy','AI Creatives — images & videos','Brand Story & A+ Content','Full GST, ITR & legal support','Bank-platform reconciliation','Weekly KPI scorecard','Dedicated account manager','All general services FREE (excl. financial/legal)','Govt fees at actuals'],
+      feats:['5+ Seller Accounts managed','Unlimited listings & cataloguing','Full PPC + advanced ad strategy','AI Creatives — images & videos','Brand Story & A+ Content','Weekly KPI scorecard','Dedicated account manager','All general services FREE (excl. financial/legal)','Govt fees at actuals'],
       nope:[] }
   ],
   addons:[
@@ -1389,6 +1439,9 @@ const DB = {
   checkoutData:null,
   _total:0,
   _advance:0,
+  _payNow:0,
+  _checkoutIsCOD:false,
+  _checkoutIsProduct:false,
   pendingAction:null,
   adminIn:false
 };
@@ -1488,7 +1541,7 @@ function renderSvcGrid(){
       <div class="svc-t">${s.nm}</div>
       <div class="svc-d">${s.ds}</div>
       <div class="svc-p">${cd.pr}</div>
-      <button class="sadd" onclick="toggleSvcCart(${JSON.stringify(s).replace(/"/g,"'")},event)">${inC?'✓':'+'}</button>
+      <button class="sadd" onclick="toggleSvcByNo(${s.no},event)">${inC?'✓':'+'}</button>
     </div>`;
   }).join('')}</div>`;
 }
@@ -1497,6 +1550,16 @@ function toggleSvcCart(s,e){
   const idx=DB.cart.findIndex(c=>c.id==='svc-'+s.no);
   if(idx>-1){DB.cart.splice(idx,1);showToast('Removed from cart');}
   else{const cd=DB.services[DB.curCat];DB.cart.push({type:'service',id:'svc-'+s.no,nm:s.nm,pr:cd.pr,cat:DB.curCat});showToast('Added to cart ✓');}
+  updateCartBar();renderSvcGrid();
+}
+function toggleSvcByNo(no, e){
+  e.stopPropagation();
+  const cd=DB.services[DB.curCat];
+  const s=cd.items.find(x=>x.no==no);
+  if(!s)return;
+  const idx=DB.cart.findIndex(c=>c.id==='svc-'+no);
+  if(idx>-1){DB.cart.splice(idx,1);showToast('Removed from cart');}
+  else{DB.cart.push({type:'service',id:'svc-'+no,nm:s.nm,pr:cd.pr,cat:DB.curCat,free:s.free});showToast('Added to cart ✓');}
   updateCartBar();renderSvcGrid();
 }
 function updateCartBar(){
@@ -1515,7 +1578,16 @@ function openServiceCheckout(){
   if(!DB.user){DB.pendingAction=openServiceCheckout;openAuth('register');return;}
   DB.checkoutType='service';
   DB.checkoutData={services:svcs};
-  openCheckout(svcs.map(s=>({nm:s.nm,pr:0})),'service');
+  // Determine if services are free (plan holders get most services free)
+  const hasPlan = DB.user && DB.user.activePlan;
+  const items = svcs.map(s => {
+    // Parse price from string like "₹500" or "₹1,000"
+    const rawPr = s.pr || '';
+    const numPr = parseInt(rawPr.replace(/[^0-9]/g,'')) || 0;
+    const isFreeForPlan = s.free && hasPlan;
+    return {nm: s.nm, pr: isFreeForPlan ? 0 : numPr, free: s.free};
+  });
+  openCheckout(items, 'service');
 }
 
 // ============================================================
@@ -1536,7 +1608,7 @@ function renderProds(type,filter){
       <div class="prod-body">
         <div class="prod-nm">${p.nm}</div>
         <div class="prod-pr">₹${p.pr.toLocaleString('en-IN')}${p.mrp?`<span class="prod-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>`:''}</div>
-        <div class="prod-del">${type==='footwear'?'⚡ Jaipur: 1 day · 📦 Pan India: 3-4 days':'📦 Pan India: 3-4 days'}</div>
+        <div class="prod-del">${type==='footwear'?'⚡ Jaipur: 1 day · 📦 Pan India: 3-4 days · 🚚 FREE Shipping':'📦 Pan India: 3-4 days · 🚚 FREE Shipping'}</div>
         <div class="prod-acts">
           <button class="pbuy" onclick="buyProduct(${JSON.stringify(p).replace(/"/g,"'")})">Buy Now</button>
           <button class="pcart" onclick="addToCart(${JSON.stringify(p).replace(/"/g,"'")})">+ Cart</button>
@@ -1558,7 +1630,14 @@ function teaFilter(f,btn){
 function buyProduct(p){
   DB.checkoutType='product';
   DB.checkoutData={item:p};
-  openCheckout([{nm:p.nm,pr:p.pr}],'product');
+  if(DB.user){
+    // Logged in user: open checkout with fields pre-filled and compact
+    openCheckout([{nm:p.nm,pr:p.pr}],'product');
+  } else {
+    // Not logged in: ask to register first or proceed as guest
+    DB.pendingAction=()=>buyProduct(p);
+    openAuth('register');
+  }
 }
 function addToCart(p){
   DB.cart.push({type:'product',id:p.id,nm:p.nm,pr:p.pr});
@@ -1600,98 +1679,379 @@ function renderTestis(el,arr){
 function renderHomeTestis(){renderTestis(document.getElementById('homeTestis'),DB.testimonials.slice(0,3));}
 
 // ============================================================
-// CHECKOUT & PAYMENT
+// CHECKOUT & PAYMENT — FULLY FIXED
 // ============================================================
-function openCheckout(items,type){
-  const m=document.getElementById('mCheckout');
-  const isProduct=type==='product';
-  const isService=type==='service';
-  document.getElementById('addrWrap').style.display=isProduct?'block':'none';
-  document.getElementById('loginWrap').style.display=(isService||type==='plan')?'block':'none';
-  let total=items.reduce((s,i)=>s+(i.pr||0),0);
-  let adv=Math.round(total*0.5)||200;
-  DB._total=total;DB._advance=adv;
-  document.getElementById('oItems').innerHTML=items.map(i=>`<div class="or"><span>${i.nm}</span><span class="ov">${i.pr?'₹'+i.pr.toLocaleString('en-IN'):'Call to discuss'}</span></div>`).join('');
-  document.getElementById('oAdv').innerHTML=total>0?`<div class="or" style="color:var(--warn)"><span>50% Advance Required</span><span class="ov">₹${adv.toLocaleString('en-IN')}</span></div>`:`<div class="or"><span>Price confirmed on call</span><span class="ov">—</span></div>`;
-  document.getElementById('oTotal').innerHTML=total>0?`<div class="or tot"><span>Amount Due Now</span><span class="ov">₹${adv.toLocaleString('en-IN')}</span></div>`:`<div class="or tot"><span>Submit enquiry first</span><span class="ov">Free</span></div>`;
-  if(DB.user){setV('co_name',DB.user.name||'');setV('co_phone',DB.user.phone||'');setV('co_email',DB.user.email||'');}
+
+// All available add-ons selectable during checkout
+const CHECKOUT_ADDONS = [
+  {id:'global',nm:'Global Expansion (Etsy/eBay)',pr:4000,mo:true},
+  {id:'tax',nm:'Tax & Accounting Add-on',pr:1000,mo:true},
+  {id:'busy',nm:'Busy Accounting Software',pr:999,mo:true},
+  {id:'social',nm:'Social Media Management',pr:1500,mo:true},
+  {id:'web',nm:'Website & Landing Page',pr:2000,mo:false},
+  {id:'ai_agent',nm:'AI Agent Setup (Basic)',pr:5000,mo:false},
+  {id:'label',nm:'Label Printing (Jaipur)',pr:0,mo:false,callToQuote:true},
+];
+
+function openCheckout(items, type) {
+  const m = document.getElementById('mCheckout');
+  const isProduct = type === 'product';
+  const isFreeService = type === 'service' && items.every(i => !i.pr || i.pr === 0);
+  const isPlan = type === 'plan';
+  const isService = type === 'service';
+
+  // Total amount
+  const total = items.reduce((s, i) => s + (i.pr || 0), 0);
+  DB._total = total;
+  DB._isFreeService = isFreeService || total === 0;
+  DB._checkoutIsProduct = isProduct;
+  DB._checkoutIsCOD = false;
+
+  // Show/hide sections
+  document.getElementById('addrWrap').style.display = isProduct ? 'block' : 'none';
+  document.getElementById('advanceWrap').style.display = (!isProduct && total > 0 && !isFreeService) ? 'block' : 'none';
+  document.getElementById('co_advance').checked = false;
+
+  // COD logic: only for products under ₹150
+  const codEl = document.getElementById('codWrap');
+  codEl.style.display = (isProduct && total > 0 && total <= 150) ? 'block' : 'none';
+  document.getElementById('co_cod').checked = false;
+
+  // Shipping row — always free for products
+  document.getElementById('oShipping').innerHTML = isProduct
+    ? `<div class="or" style="color:var(--ok)"><span>🚚 Shipping</span><span class="ov" style="color:var(--ok);font-weight:700">FREE — Pan India</span></div>`
+    : '';
+
+  // Order items
+  document.getElementById('oItems').innerHTML = items.map(i =>
+    `<div class="or"><span style="font-weight:500">${i.nm}</span><span class="ov">${i.pr > 0 ? '₹' + i.pr.toLocaleString('en-IN') : i.pr === 0 && isService ? '<span style="color:var(--ok);font-weight:700">FREE w/ Plan</span>' : 'Call to discuss'}</span></div>`
+  ).join('');
+
+  // Add-ons (for plans & services)
+  const addonsWrap = document.getElementById('oAddonsWrap');
+  const addons2 = document.getElementById('oAddons2');
+  if (!isProduct) {
+    addonsWrap.style.display = 'block';
+    addons2.innerHTML = `<div style="font-size:10.5px;color:var(--g4);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem">Optional Add-ons</div>` +
+      CHECKOUT_ADDONS.map(a => `
+        <label style="display:flex;align-items:center;gap:.6rem;padding:5px 0;font-size:12px;cursor:pointer;border-bottom:1px solid #f5f5f0">
+          <input type="checkbox" class="co_addon" data-id="${a.id}" data-pr="${a.pr}" data-mo="${a.mo}" data-name="${a.nm}" onchange="recalcCheckout()" style="accent-color:var(--rg)">
+          <span style="flex:1">${a.nm}</span>
+          <span style="color:var(--rg);font-weight:600;font-size:11px">${a.callToQuote ? 'Call for quote' : '₹' + a.pr.toLocaleString('en-IN') + (a.mo ? '/mo' : '')}</span>
+        </label>`).join('');
+  } else {
+    addonsWrap.style.display = 'none';
+  }
+
+  // Title
+  document.getElementById('coTitle').textContent = isPlan ? 'Subscribe to Plan' : isProduct ? 'Complete Purchase' : isFreeService ? 'Confirm Free Services' : 'Confirm Order';
+  document.getElementById('coSubtitle').textContent = isFreeService ? 'These services are FREE with your plan.' :
+    isProduct && total <= 150 ? 'COD available — pay on delivery or pay online.' :
+    isProduct ? 'Free shipping across India — prepaid only.' :
+    isPlan ? 'Review and subscribe to your plan.' : 'Review selected services.';
+
+  // Button state
+  const btn = document.getElementById('coActionBtn');
+  if (isFreeService) {
+    btn.textContent = '✅ Done — Confirm Services';
+    btn.style.background = 'var(--ok)';
+    btn.style.color = '#fff';
+  } else if (isProduct && total <= 150) {
+    btn.textContent = 'Confirm Order →';
+    btn.style.background = '#000';
+    btn.style.color = '#fff';
+  } else {
+    btn.textContent = '💳 Pay Now & Confirm';
+    btn.style.background = '#000';
+    btn.style.color = '#fff';
+  }
+
+  // Payment info text
+  const payInfo = document.getElementById('payMethodInfo');
+  const waOpt = document.getElementById('waPayOption');
+  if (isFreeService) {
+    payInfo.innerHTML = '';
+    waOpt.style.display = 'none';
+  } else if (isProduct && total <= 150) {
+    payInfo.innerHTML = '💡 <strong>COD Option:</strong> Tick the COD checkbox above to pay cash on delivery. Or uncheck to pay online now via UPI / Card / Net Banking.';
+    waOpt.style.display = 'block';
+  } else if (isProduct && total > 150) {
+    payInfo.innerHTML = '💳 <strong>Prepaid only</strong> for orders above ₹150. Pay securely via UPI, Card or Net Banking. COD not available for this order.<br>🚚 <strong>Free shipping</strong> across India.';
+    waOpt.style.display = 'block';
+  } else {
+    payInfo.innerHTML = '🔒 Secure payment via UPI, Card, Net Banking · 50% advance optional · Work starts immediately after payment.';
+    waOpt.style.display = 'block';
+  }
+
+  // User fields
+  if (DB.user) {
+    document.getElementById('userFieldsWrap').style.display = 'none';
+    document.getElementById('userLoggedNotice').style.display = 'block';
+    document.getElementById('coUserName').textContent = DB.user.name;
+    document.getElementById('coUserEmail').textContent = DB.user.email;
+  } else {
+    document.getElementById('userFieldsWrap').style.display = 'block';
+    document.getElementById('userLoggedNotice').style.display = 'none';
+  }
+
+  recalcCheckout();
   m.classList.add('open');
 }
-function setV(id,v){const e=document.getElementById(id);if(e)e.value=v;}
-function CM(id){document.getElementById(id).classList.remove('open');}
 
-function processPayment(){
-  const name=document.getElementById('co_name').value.trim();
-  const phone=document.getElementById('co_phone').value.trim();
-  const email=document.getElementById('co_email').value.trim();
-  const addr=document.getElementById('co_addr')?document.getElementById('co_addr').value.trim():'';
-  const tc=document.getElementById('co_tc').checked;
-  if(!name){showToast('Please enter your full name');return;}
-  if(!phone||!/^\d{10}$/.test(phone)){showToast('Enter valid 10-digit mobile number');return;}
-  if(!email||!email.includes('@')){showToast('Enter valid email address');return;}
-  if(!tc){showToast('Please accept Terms & Conditions to proceed');return;}
-  if(DB.checkoutType==='product'&&!addr){showToast('Please enter delivery address');return;}
+function useAnotherAccount() {
+  document.getElementById('userFieldsWrap').style.display = 'block';
+  document.getElementById('userLoggedNotice').style.display = 'none';
+}
 
-  const adv=DB._advance;
-  const desc=DB.checkoutType==='plan'?DB.checkoutData.planName+' Plan':
-    DB.checkoutType==='service'?DB.checkoutData.services.map(s=>s.nm).join(', '):
-    DB.checkoutData?.item?.nm||'Product';
+function onCODChange() {
+  DB._checkoutIsCOD = document.getElementById('co_cod').checked;
+  const btn = document.getElementById('coActionBtn');
+  if (DB._checkoutIsCOD) {
+    btn.textContent = '📦 Confirm COD Order';
+    btn.style.background = 'var(--ok)';
+    document.getElementById('waPayOption').style.display = 'none';
+  } else {
+    btn.textContent = '💳 Pay Now & Confirm';
+    btn.style.background = '#000';
+    document.getElementById('waPayOption').style.display = 'block';
+  }
+  recalcCheckout();
+}
 
-  // Save/update user
-  if(document.getElementById('co_uid')?.value){
-    const u={name,phone,email,addr,uid:document.getElementById('co_uid').value||'SS'+Date.now(),registeredAt:new Date().toISOString()};
-    DB.user=u;localStorage.setItem('ss_user',JSON.stringify(u));updateNavUser();
+function recalcCheckout() {
+  const addonTotal = [...document.querySelectorAll('.co_addon:checked')].reduce((s, el) => s + parseInt(el.dataset.pr || 0), 0);
+  const base = DB._total + addonTotal;
+  const isCOD = document.getElementById('co_cod') && document.getElementById('co_cod').checked;
+  const useAdv = document.getElementById('co_advance') && document.getElementById('co_advance').checked;
+
+  let payNow = base;
+  if (useAdv) payNow = Math.round(base * 0.5);
+  if (isCOD) payNow = 0;
+  DB._payNow = payNow;
+
+  document.getElementById('oCOD').innerHTML = isCOD
+    ? `<div class="or" style="color:var(--ok)"><span>Payment Method</span><span class="ov" style="color:var(--ok);font-weight:700">Cash on Delivery</span></div>` : '';
+
+  if (addonTotal > 0) {
+    document.getElementById('oAddons').innerHTML = `<div class="or" style="color:var(--purple)"><span>Add-ons</span><span class="ov">+₹${addonTotal.toLocaleString('en-IN')}</span></div>`;
+  } else {
+    document.getElementById('oAddons').innerHTML = '';
   }
 
-  if(adv>0){
-    // Load Razorpay and process
-    loadRazorpay(()=>{
-      const opts={
-        key: DB.cfg.rzpKey,
-        amount: adv*100,
-        currency:'INR',
-        name:'Stepy Solutions',
-        description: desc.substring(0,254),
-        prefill:{name,email,contact:'91'+phone},
-        theme:{color:'#C9A96E'},
-        handler:function(resp){
-          onPaySuccess({name,phone,email,addr,desc,adv,payId:resp.razorpay_payment_id||'RZP'+Date.now()});
-        },
-        modal:{
-          ondismiss:function(){showToast('Payment cancelled');}
-        }
-      };
-      try{
-        const rzp=new Razorpay(opts);
-        rzp.on('payment.failed',function(resp){
-          showToast('Payment failed: '+resp.error.description);
-        });
-        rzp.open();
-      }catch(e){
-        // Fallback: simulate for demo if Razorpay fails
-        if(confirm('Razorpay not available in demo mode. Simulate successful payment?')){
-          onPaySuccess({name,phone,email,addr,desc,adv,payId:'DEMO'+Date.now()});
-        }
-      }
-    });
-  }else{
-    // Free inquiry
-    onPaySuccess({name,phone,email,addr,desc,adv:0,payId:'INQ'+Date.now()});
+  if (DB._isFreeService) {
+    document.getElementById('oTotal').innerHTML = `<div class="or tot"><span>Total</span><span class="ov" style="color:var(--ok);font-size:1.1rem">FREE</span></div>`;
+  } else if (isCOD) {
+    document.getElementById('oTotal').innerHTML = `<div class="or tot"><span>Pay on Delivery</span><span class="ov" style="font-size:1.1rem">₹${base.toLocaleString('en-IN')}</span></div>`;
+  } else {
+    const label = useAdv ? '50% Advance Due Now' : 'Total';
+    document.getElementById('oTotal').innerHTML = `
+      <div class="or tot"><span>${label}</span><span class="ov" style="font-size:1.1rem">₹${payNow.toLocaleString('en-IN')}</span></div>
+      ${useAdv ? `<div style="font-size:10.5px;color:var(--g4);text-align:right">Balance ₹${(base-payNow).toLocaleString('en-IN')} on delivery</div>` : ''}
+    `;
+    if (useAdv) document.getElementById('advanceAmountShow').textContent = `50% = ₹${Math.round(base*0.5).toLocaleString('en-IN')} due now`;
   }
 }
 
-function loadRazorpay(cb){
-  if(window.Razorpay){cb();return;}
-  const s=document.createElement('script');
-  s.src='https://checkout.razorpay.com/v1/checkout.js';
-  s.onload=cb;
-  s.onerror=()=>{
-    if(confirm('Payment gateway could not load. Simulate payment for demo?')){
-      cb(); // Will fail gracefully to fallback
-    }
+function toggleAdvance() { recalcCheckout(); }
+
+function payViaWhatsApp() {
+  // Collect info and redirect to WhatsApp with payment request
+  let name = DB.user ? DB.user.name : (document.getElementById('co_name')?.value?.trim() || 'Customer');
+  let phone = DB.user ? DB.user.phone : (document.getElementById('co_phone')?.value?.trim() || '');
+  const amt = DB._payNow || DB._total;
+  const oid = 'SS' + Date.now();
+  const msg = encodeURIComponent(
+    `💰 *Payment Request — Stepy Solutions*\n\n` +
+    `Hi ${name}!\n\nPlease pay ₹${amt.toLocaleString('en-IN')} via UPI or bank transfer:\n\n` +
+    `📱 *UPI ID:* stepysolutions@paytm\n` +
+    `🏦 *Or pay via:* Google Pay / PhonePe / Paytm to 7424932963\n\n` +
+    `🆔 Order Ref: ${oid}\n` +
+    `📸 After payment, please send the screenshot here and we will confirm your order immediately.\n\n` +
+    `Thank you! — Stepy Solutions`
+  );
+  window.open(`https://wa.me/${DB.cfg.ownerWA}?text=${msg}`, '_blank');
+  showToast('WhatsApp opened with payment details ✓');
+}
+
+function setV(id, v) { const e = document.getElementById(id); if (e) e.value = v; }
+function CM(id) { document.getElementById(id).classList.remove('open'); }
+
+function doCheckoutAction() {
+  const tc = document.getElementById('co_tc').checked;
+  if (!tc) { showToast('Please accept Terms & Conditions'); return; }
+
+  // Get user details
+  let name, phone, email, addr = '';
+  const loggedIn = DB.user && document.getElementById('userLoggedNotice').style.display !== 'none';
+  if (loggedIn) {
+    name = DB.user.name; phone = DB.user.phone; email = DB.user.email; addr = DB.user.addr || '';
+  } else {
+    name = (document.getElementById('co_name')?.value || '').trim();
+    phone = (document.getElementById('co_phone')?.value || '').trim();
+    email = (document.getElementById('co_email')?.value || '').trim();
+    if (!name) { showToast('Please enter your full name'); return; }
+    if (!phone || !/^\d{10}$/.test(phone)) { showToast('Enter valid 10-digit mobile number'); return; }
+    if (!email || !email.includes('@')) { showToast('Enter valid email address'); return; }
+  }
+
+  if (DB.checkoutType === 'product') {
+    addr = (document.getElementById('co_addr')?.value || '').trim();
+    if (!addr) { showToast('Please enter delivery address'); return; }
+  }
+
+  const selectedAddons = [...document.querySelectorAll('.co_addon:checked')].map(el => el.dataset.name).join(', ');
+  const desc = DB.checkoutType === 'plan' ? DB.checkoutData.planName + ' Plan' + (selectedAddons ? ' + ' + selectedAddons : '') :
+    DB.checkoutType === 'service' ? (DB.checkoutData.services || []).map(s => s.nm).join(', ') + (selectedAddons ? ' + Add-ons: ' + selectedAddons : '') :
+    (DB.checkoutData?.item?.nm || 'Product') + (selectedAddons ? ' + ' + selectedAddons : '');
+
+  saveUserIfNew(name, phone, email, addr);
+
+  // FREE service — just confirm
+  if (DB._isFreeService) {
+    onOrderComplete({ name, phone, email, addr, desc, amountPaid: 0, payId: 'FREE' + Date.now(), isFree: true, isCOD: false });
+    return;
+  }
+
+  // COD order
+  const isCOD = document.getElementById('co_cod') && document.getElementById('co_cod').checked;
+  if (isCOD) {
+    onOrderComplete({ name, phone, email, addr, desc, amountPaid: 0, payId: 'COD' + Date.now(), isFree: false, isCOD: true });
+    return;
+  }
+
+  // Calculate payment amount
+  const addonTotal = [...document.querySelectorAll('.co_addon:checked')].reduce((s, el) => s + parseInt(el.dataset.pr || 0), 0);
+  const base = DB._total + addonTotal;
+  const useAdv = document.getElementById('co_advance')?.checked;
+  const payNow = useAdv ? Math.round(base * 0.5) : base;
+
+  if (payNow <= 0) {
+    onOrderComplete({ name, phone, email, addr, desc, amountPaid: 0, payId: 'INQ' + Date.now(), isFree: true, isCOD: false });
+    return;
+  }
+
+  // Try Razorpay — but ALWAYS offer WhatsApp fallback immediately
+  if (window.Razorpay || typeof Razorpay !== 'undefined') {
+    launchRazorpay(payNow, desc, name, email, phone, addr, isCOD);
+  } else {
+    // Razorpay not loaded — go straight to WhatsApp payment
+    showPaymentOptions(payNow, desc, name, phone, addr);
+  }
+}
+
+function launchRazorpay(payNow, desc, name, email, phone, addr, isCOD) {
+  const opts = {
+    key: DB.cfg.rzpKey,
+    amount: payNow * 100,
+    currency: 'INR',
+    name: 'Stepy Solutions',
+    description: desc.substring(0, 254),
+    prefill: { name, email, contact: '91' + phone },
+    theme: { color: '#C9A96E' },
+    handler: function(resp) {
+      onOrderComplete({ name, phone, email, addr, desc, amountPaid: payNow, payId: resp.razorpay_payment_id || 'RZP' + Date.now(), isFree: false, isCOD: false });
+    },
+    modal: { ondismiss: function() { showToast('Payment window closed. Use WhatsApp option below.'); } }
   };
+  try {
+    const rzp = new Razorpay(opts);
+    rzp.on('payment.failed', function() {
+      showToast('Payment failed — please try WhatsApp payment option below.');
+    });
+    rzp.open();
+  } catch(e) {
+    showPaymentOptions(payNow, desc, name, phone, addr);
+  }
+}
+
+function showPaymentOptions(payNow, desc, name, phone, addr) {
+  // Show inline payment options instead of crashing
+  const el = document.getElementById('payMethodInfo');
+  el.style.background = '#fff8f0';
+  el.style.border = '1px solid rgba(217,119,6,.3)';
+  el.innerHTML = `
+    <div style="font-weight:600;color:var(--warn);margin-bottom:.5rem">Online payment: choose a method below</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
+      <a href="upi://pay?pa=stepysolutions@paytm&pn=StepySolutions&am=${payNow}&cu=INR&tn=Order" style="display:block;background:#5F259F;color:#fff;border-radius:6px;padding:9px 12px;text-align:center;font-size:12.5px;font-weight:600;text-decoration:none">📱 Pay via UPI App</a>
+      <button onclick="payViaWhatsApp()" style="background:#25D366;color:#fff;border:none;border-radius:6px;padding:9px 12px;font-size:12.5px;font-weight:600;cursor:pointer">💬 Pay via WhatsApp</button>
+    </div>
+    <div style="font-size:11px;color:var(--g4)">UPI ID: <strong>stepysolutions@paytm</strong> · Amount: <strong>₹${payNow.toLocaleString('en-IN')}</strong></div>
+    <div style="font-size:11px;color:var(--g4);margin-top:.25rem">After payment, send screenshot on WhatsApp — order confirmed immediately.</div>
+  `;
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function processPayment() { doCheckoutAction(); }
+
+function saveUserIfNew(name, phone, email, addr) {
+  if (!DB.user || !DB.user.uid) {
+    const u = { name, phone, email, addr, uid: 'SS' + Date.now(), registeredAt: new Date().toISOString() };
+    DB.user = u; localStorage.setItem('ss_user', JSON.stringify(u)); updateNavUser();
+  }
+}
+
+function loadRazorpay(cb) {
+  if (window.Razorpay) { cb(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  s.onload = cb;
+  s.onerror = () => { cb(); };
   document.head.appendChild(s);
 }
+
+function onOrderComplete({ name, phone, email, addr, desc, amountPaid, payId, isFree, isCOD }) {
+  CM('mCheckout');
+  const oid = 'SS' + Date.now();
+  const now = new Date();
+  const order = {
+    id: oid, payId, name, phone, email, addr,
+    items: desc, amount: amountPaid, type: DB.checkoutType,
+    date: now.toLocaleDateString('en-IN'),
+    status: isCOD ? 'COD - Pending Delivery' : isFree ? 'Confirmed (Free)' : 'Confirmed',
+    trackingId: null, isFree, isCOD
+  };
+  DB.orders.push(order);
+  localStorage.setItem('ss_orders', JSON.stringify(DB.orders));
+  DB.cart = DB.cart.filter(c => c.type !== 'service');
+  updateCartBar();
+
+  const isProduct = DB.checkoutType === 'product';
+  let msgHtml, detailHtml;
+
+  if (isCOD) {
+    msgHtml = `<strong>${name}</strong> — COD Order #${oid}<br><span style="color:var(--g5)">${desc.substring(0,80)}</span><br><span style="color:var(--ok);font-weight:700">Cash on Delivery — Pay when order arrives!</span>`;
+    detailHtml = `📦 Your order is confirmed! Tracking ID will be sent on WhatsApp within <strong>24 hours</strong>.<br>🚚 Free Shipping · Jaipur: 1 day · Pan India: 3-4 days.<br>💰 Pay ₹${DB._total.toLocaleString('en-IN')} cash to delivery person.`;
+  } else if (isFree) {
+    msgHtml = `<strong>${name}</strong> — Confirmed!<br><span style="color:var(--ok);font-weight:700">✅ ${isProduct ? 'Free order confirmed.' : 'Services confirmed — FREE with your plan.'}</span>`;
+    detailHtml = isProduct
+      ? `📦 Tracking ID on WhatsApp within 24 hours.<br>🚚 Free Shipping across India.`
+      : `📞 Our team will contact you shortly on WhatsApp to begin your services.`;
+  } else {
+    msgHtml = `<strong>${name}</strong> — Order #${oid}<br><span style="color:var(--g5)">${desc.substring(0,80)}</span><br><span style="color:var(--rg);font-weight:700">₹${amountPaid.toLocaleString('en-IN')} paid successfully</span>`;
+    detailHtml = isProduct
+      ? `📦 Tracking ID sent on WhatsApp within <strong>24 hours</strong>.<br>🚚 Free Shipping · Jaipur: 1 day · Pan India: 3-4 days.`
+      : `📞 We will call you as soon as possible to start your service.<br>📱 All updates on WhatsApp.`;
+  }
+
+  document.getElementById('succMsg').innerHTML = msgHtml;
+  document.getElementById('succDetail').innerHTML = detailHtml;
+  document.getElementById('mSuccess').classList.add('open');
+
+  exportToExcel({ name, phone, email, addr, desc, amountPaid, payId, oid, date: now.toLocaleDateString('en-IN') });
+
+  const orderType = isCOD ? 'COD ORDER' : isFree ? 'FREE ORDER CONFIRMED' : 'PAID ORDER';
+  const ownerMsg = encodeURIComponent(
+    `🛒 *${orderType} — Stepy Solutions*\n\n` +
+    `👤 Name: ${name}\n📱 Phone: ${phone}\n📧 Email: ${email}\n` +
+    (addr ? `📍 Address: ${addr}\n` : '') +
+    `\n📦 Items: ${desc}\n` +
+    `💰 Amount: ${isCOD ? 'COD — ₹' + DB._total.toLocaleString('en-IN') + ' collect on delivery' : '₹' + amountPaid.toLocaleString('en-IN') + ' paid'}\n` +
+    `🆔 Order ID: ${oid}\n🆔 Payment ID: ${payId}\n📅 Date: ${now.toLocaleDateString('en-IN')}`
+  );
+  setTimeout(() => window.open(`https://wa.me/${DB.cfg.ownerWA}?text=${ownerMsg}`, '_blank'), 1200);
+}
+
+function onPaySuccess(args) { onOrderComplete({ ...args, amountPaid: args.adv, isFree: args.adv === 0, isCOD: false }); }
 
 function onPaySuccess({name,phone,email,addr,desc,adv,payId}){
   CM('mCheckout');
@@ -2042,6 +2402,53 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 });
+
+// ============================================================
+// EXCEL EXPORT — sends registration/purchase data as CSV download
+// ============================================================
+function exportToExcel({ name, phone, email, addr, desc, amountPaid, payId, oid, date }) {
+  try {
+    const rows = [
+      ['Order ID', 'Date', 'Customer Name', 'Phone', 'Email', 'Address', 'Items/Services', 'Amount Paid', 'Payment ID'],
+      [oid, date, name, phone, email, addr || 'N/A', desc, '₹' + amountPaid.toLocaleString('en-IN'), payId]
+    ];
+    // Append to existing data in localStorage
+    const existing = JSON.parse(localStorage.getItem('ss_excel_data') || '[]');
+    existing.push({ oid, date, name, phone, email, addr: addr || '', desc, amount: amountPaid, payId });
+    localStorage.setItem('ss_excel_data', JSON.stringify(existing));
+
+    // Auto-download CSV for admin records
+    const csvContent = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `StepySolutions_Order_${oid}_${date.replace(/\//g, '-')}.csv`;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.log('Excel export note:', e.message);
+  }
+}
+
+// Admin: download all records as CSV
+function downloadAllExcel() {
+  const data = JSON.parse(localStorage.getItem('ss_excel_data') || '[]');
+  if (!data.length) { showToast('No records found'); return; }
+  const headers = ['Order ID', 'Date', 'Name', 'Phone', 'Email', 'Address', 'Items', 'Amount', 'Payment ID'];
+  const rows = data.map(d => [d.oid, d.date, d.name, d.phone, d.email, d.addr, d.desc, '₹' + d.amount, d.payId]);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${String(c || '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'StepySolutions_AllOrders.csv'; a.style.display = 'none';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('CSV downloaded ✓');
+}
 
 // ============================================================
 // INIT
