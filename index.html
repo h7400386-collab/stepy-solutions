@@ -370,10 +370,7 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
       <button class="nl" onclick="G('home')">Home</button>
       <button class="nl" onclick="G('plans')">Plans</button>
       <button class="nl" onclick="G('services')">Services</button>
-      <button class="nl" onclick="G('footwear')">Footwear</button>
-      <button class="nl" onclick="G('tea')">Tea</button>
-      <button class="nl" onclick="G('affiliate')">Affiliate</button>
-      <button class="nl" onclick="G('dropship')">Dropship</button>
+
       <button class="nl" onclick="G('label')">Labels</button>
       <button class="nl" onclick="G('about')">About</button>
       <button class="nl" onclick="G('contact')">Support</button>
@@ -387,10 +384,8 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
   <button class="nl" onclick="G('home')">🏠 Home</button>
   <button class="nl" onclick="G('plans')">💼 Plans & Pricing</button>
   <button class="nl" onclick="G('services')">🛠 All Services</button>
-  <button class="nl" onclick="G('footwear')">👟 Footwear Shop</button>
-  <button class="nl" onclick="G('tea')">🍵 Tea Shop</button>
-  <button class="nl" onclick="G('affiliate')">🤝 Affiliate</button>
-  <button class="nl" onclick="G('dropship')">📦 Dropshipping</button>
+
+
   <button class="nl" onclick="G('label')">🏷️ Label Printing</button>
   <button class="nl" onclick="G('about')">👤 About</button>
   <button class="nl" onclick="G('contact')">📞 Support</button>
@@ -687,9 +682,7 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
       <div class="st" style="color:#fff">All Our Offerings</div>
       <div class="ql-grid" style="margin-top:1.75rem">
         <div class="ql" onclick="G('plans')"><div style="font-size:2.75rem;margin-bottom:.65rem">💼</div><div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.2rem">E-com Services</div><div style="font-size:10.5px;color:#555">80+ services · 3 plans</div></div>
-        <div class="ql" onclick="G('footwear')"><div style="font-size:2.75rem;margin-bottom:.65rem">👟</div><div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.2rem">Footwear Shop</div><div style="font-size:10.5px;color:#555">Bulk & Single · 1-day Jaipur</div></div>
-        <div class="ql" onclick="G('tea')"><div style="font-size:2.75rem;margin-bottom:.65rem">🍵</div><div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.2rem">Premium Tea</div><div style="font-size:10.5px;color:#555">Single & Bulk · Pan India</div></div>
-        <div class="ql" onclick="G('affiliate')"><div style="font-size:2.75rem;margin-bottom:.65rem">🤝</div><div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.2rem">Affiliate</div><div style="font-size:10.5px;color:#555">Earn without stock</div></div>
+
         <div class="ql" onclick="G('label')"><div style="font-size:2.75rem;margin-bottom:.65rem">🏷️</div><div style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.2rem">Label Printing</div><div style="font-size:10.5px;color:#555">All types · Jaipur only</div></div>
       </div>
     </div>
@@ -795,123 +788,6 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
   </div>
 </div>
 
-<!-- ===== PAGE: FOOTWEAR ===== -->
-<div class="pg" id="pg-footwear">
-  <div class="pro-banner banner-fw" style="border-radius:0;margin:0">
-    <div class="banner-glow" style="background:radial-gradient(ellipse 60% 80% at center,rgba(201,169,110,.1),transparent 70%)"></div>
-    <div style="position:relative;z-index:1;text-align:center">
-      <div class="ey" style="color:var(--rg)">Stepy Solutions</div>
-      <h1 style="font-size:clamp(2rem,5vw,3.3rem);color:#fff;font-weight:300;margin-bottom:.65rem">Premium Footwear Collection</h1>
-      <p style="color:#888;font-size:.9rem;max-width:480px;margin:0 auto">Authentic footwear · Bulk & single orders</p>
-      <div style="display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
-        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:4px 13px;border-radius:20px;font-size:10.5px">⚡ 1-Day Delivery Jaipur</span>
-        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:4px 13px;border-radius:20px;font-size:10.5px">📦 3-4 Days Pan India</span>
-        <span style="background:#1a1a1a;color:var(--rg);border:1px solid #333;padding:4px 13px;border-radius:20px;font-size:10.5px">🏭 Bulk Orders Welcome</span>
-      </div>
-    </div>
-  </div>
-  <div class="sec sec-bg">
-    <div class="si">
-      <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem">
-        <button class="cbt on" data-fw="all" onclick="fwFilter('all',this)">All</button>
-        <button class="cbt" data-fw="mens" onclick="fwFilter('mens',this)">Men's</button>
-        <button class="cbt" data-fw="womens" onclick="fwFilter('womens',this)">Women's</button>
-        <button class="cbt" data-fw="kids" onclick="fwFilter('kids',this)">Kids</button>
-        <button class="cbt" data-fw="bulk" onclick="fwFilter('bulk',this)">Bulk Orders</button>
-      </div>
-      <div class="prods" id="fwGrid"></div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:1.4rem;margin-top:2.5rem">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;margin-bottom:.2rem">Return Policy — Footwear</div>
-        <p style="font-size:11.5px;color:var(--g4);margin-bottom:.7rem">Return window: 7 days from delivery only · No exchange</p>
-        <div class="ret-grid">
-          <div class="ret-box ret-ok"><h4 style="color:var(--ok)">✅ Returns Accepted</h4><ul><li>Wrong size received</li><li>Damaged/defective on delivery</li></ul></div>
-          <div class="ret-box ret-no"><h4 style="color:var(--err)">❌ Not Accepted</h4><ul><li>Change of mind</li><li>Used products</li><li>After 7 days</li><li>No exchange available</li></ul></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE: TEA ===== -->
-<div class="pg" id="pg-tea">
-  <div class="pro-banner banner-tea" style="border-radius:0;margin:0">
-    <div class="banner-glow" style="background:radial-gradient(ellipse 60% 80% at center,rgba(139,90,43,.2),transparent 70%)"></div>
-    <div style="position:relative;z-index:1;text-align:center">
-      <div class="ey" style="color:#C9922A">Stepy Solutions</div>
-      <h1 style="font-size:clamp(2rem,5vw,3.3rem);color:#fff;font-weight:300;margin-bottom:.65rem">Premium Tea Collection</h1>
-      <p style="color:#888;font-size:.9rem;max-width:480px;margin:0 auto">Authentic teas · Single & bulk orders welcome</p>
-    </div>
-  </div>
-  <div class="sec sec-bg">
-    <div class="si">
-      <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem">
-        <button class="cbt on" data-tea="all" onclick="teaFilter('all',this)">All</button>
-        <button class="cbt" data-tea="black" onclick="teaFilter('black',this)">Black Tea</button>
-        <button class="cbt" data-tea="green" onclick="teaFilter('green',this)">Green Tea</button>
-        <button class="cbt" data-tea="premium" onclick="teaFilter('premium',this)">Premium</button>
-        <button class="cbt" data-tea="bulk" onclick="teaFilter('bulk',this)">Bulk</button>
-      </div>
-      <div class="prods" id="teaGrid"></div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:1.4rem;margin-top:2.5rem">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;margin-bottom:.2rem">Return Policy — Tea</div>
-        <p style="font-size:11.5px;color:var(--g4);margin-bottom:.7rem">7 days from delivery · No exchange</p>
-        <div class="ret-grid">
-          <div class="ret-box ret-ok"><h4 style="color:var(--ok)">✅ Returns Accepted</h4><ul><li>Expired tea received</li><li>Poor smell/quality issue</li><li>Damaged packaging</li></ul></div>
-          <div class="ret-box ret-no"><h4 style="color:var(--err)">❌ Not Accepted</h4><ul><li>Change of mind</li><li>Partially consumed</li><li>After 7 days</li></ul></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE: AFFILIATE ===== -->
-<div class="pg" id="pg-affiliate">
-  <div class="pro-banner banner-aff" style="border-radius:0;margin:0;min-height:160px">
-    <div class="banner-glow" style="background:radial-gradient(ellipse 60% 80% at center,rgba(123,63,190,.15),transparent 70%)"></div>
-    <div style="position:relative;z-index:1;text-align:center">
-      <div class="ey" style="color:var(--rg)">Earn With Stepy</div>
-      <h1 style="font-size:clamp(1.8rem,4vw,3rem);color:#fff;font-weight:300;margin-bottom:.65rem">Affiliate & Dropshipping</h1>
-      <p style="color:#888;font-size:.9rem">Promote our products. Set your price. Earn the difference.</p>
-    </div>
-  </div>
-  <div class="sec sec-bg">
-    <div class="si">
-      <div class="ey">Products to Promote</div>
-      <div class="st">Choose What to Sell</div>
-      <p class="ss" style="margin-bottom:1.75rem">Our price is fixed — you promote at your price and earn the difference. No inventory needed.</p>
-      <div class="aff-grid" id="affGrid"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE: DROPSHIP ===== -->
-<div class="pg" id="pg-dropship">
-  <div class="sec sec-bg">
-    <div class="si">
-      <div class="ey">Join Our Network</div>
-      <div class="st">Dropshipping Program</div>
-      <p class="ss" style="margin-bottom:2rem">Sell our footwear & tea without buying stock. We handle inventory, packing & shipping.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.9rem;margin-bottom:2.5rem">
-        <div class="card" style="cursor:default;text-align:center"><div style="font-size:2rem;margin-bottom:.45rem">📦</div><div style="font-size:.85rem;font-weight:500">No Stock Required</div></div>
-        <div class="card" style="cursor:default;text-align:center"><div style="font-size:2rem;margin-bottom:.45rem">💰</div><div style="font-size:.85rem;font-weight:500">Set Your Own Price</div></div>
-        <div class="card" style="cursor:default;text-align:center"><div style="font-size:2rem;margin-bottom:.45rem">🚚</div><div style="font-size:.85rem;font-weight:500">We Ship Pan India</div></div>
-        <div class="card" style="cursor:default;text-align:center"><div style="font-size:2rem;margin-bottom:.45rem">📱</div><div style="font-size:.85rem;font-weight:500">WhatsApp Support</div></div>
-      </div>
-      <div style="max-width:530px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:var(--rxl);padding:1.85rem">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:.2rem">Join Dropshipping</h3>
-        <p style="font-size:11.5px;color:var(--g4);margin-bottom:1.3rem">Onboarded within 24 hours via WhatsApp.</p>
-        <div class="fg"><label class="fl">Full Name *</label><input type="text" id="ds_nm" class="fi" placeholder="Aapka naam"></div>
-        <div class="fg"><label class="fl">WhatsApp *</label><input type="tel" id="ds_ph" class="fi" placeholder="10-digit number" maxlength="10"></div>
-        <div class="fg"><label class="fl">City / State</label><input type="text" id="ds_ct" class="fi" placeholder="Your city"></div>
-        <div class="fg"><label class="fl">Products to Sell</label>
-          <select id="ds_pr" class="fs"><option>Footwear & Tea (Both)</option><option>Footwear Only</option><option>Tea Only</option></select>
-        </div>
-        <div class="fg"><label class="fl">How will you promote?</label><textarea id="ds_pm" class="fta" placeholder="Social media, WhatsApp groups, website..."></textarea></div>
-        <button class="btn btn-blk btn-full" onclick="submitDropship()">Submit via WhatsApp →</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ===== PAGE: LABEL PRINTING ===== -->
 <div class="pg" id="pg-label">
@@ -1189,7 +1065,6 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
               <li class="ami on" onclick="showAP('testimonials',this)">⭐ Testimonials</li>
               <li class="ami" onclick="showAP('footwear',this)">👟 Footwear</li>
               <li class="ami" onclick="showAP('tea',this)">🍵 Tea</li>
-              <li class="ami" onclick="showAP('affiliate',this)">🤝 Affiliate</li>
               <li class="ami" onclick="showAP('orders',this)">📋 Orders</li>
               <li class="ami" onclick="showAP('plans_mgmt',this)">💼 Plans</li>
               <li class="ami" onclick="showAP('delivery',this)">🚚 Delivery API</li>
@@ -1244,21 +1119,6 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
                   <input type="text" id="tea_badge" class="ai" placeholder="Badge">
                 </div>
                 <button class="btn btn-rg btn-sm" style="margin-top:.7rem" onclick="addProduct('tea')">Add Product</button>
-              </div>
-            </div>
-            <!-- AFFILIATE -->
-            <div class="ap" id="ap_affiliate">
-              <div class="ap-t">Manage Affiliate Products</div>
-              <div id="adminAffList"></div>
-              <div class="aform">
-                <div class="aform-t">Add Affiliate Product</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem">
-                  <input type="text" id="af_nm" class="ai" placeholder="Product name">
-                  <input type="number" id="af_pr" class="ai" placeholder="Our price (₹)">
-                  <input type="text" id="af_earn" class="ai" placeholder="Earn (e.g. ₹100-400)">
-                  <input type="text" id="af_em" class="ai" placeholder="Emoji">
-                </div>
-                <button class="btn btn-rg btn-sm" style="margin-top:.7rem" onclick="addAff()">Add Product</button>
               </div>
             </div>
             <!-- ORDERS -->
@@ -1321,8 +1181,6 @@ footer .ft-bot{color:rgba(255,255,255,.5)!important}
         <li><a href="#" onclick="G('services')">All Services</a></li>
         <li><a href="#" onclick="G('footwear')">Footwear Shop</a></li>
         <li><a href="#" onclick="G('tea')">Tea Shop</a></li>
-        <li><a href="#" onclick="G('affiliate')">Affiliate</a></li>
-        <li><a href="#" onclick="G('dropship')">Dropshipping</a></li>
         <li><a href="#" onclick="G('label')">Label Printing</a></li>
       </ul>
     </div>
